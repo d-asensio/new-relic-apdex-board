@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`JSX Rumtime creates an element with an array of elements 1`] = `"<span>Child</span><span>Child</span><span>Child</span>"`;
+
+exports[`JSX Rumtime creates an element with another element 1`] = `"<span>Child</span>"`;
+
+exports[`JSX Rumtime creates an element with multiple classes 1`] = `
+DOMTokenList {
+  "0": "class1",
+  "1": "class2",
+}
+`;
+
+exports[`JSX Rumtime creates an element with multiple classes if \`className\` contains arbitrary spaces 1`] = `
+DOMTokenList {
+  "0": "class1",
+  "1": "class2",
+}
+`;
+
+exports[`JSX Rumtime creates an element with multiple elements 1`] = `"<span>Child</span><span>Child</span><span>Child</span>"`;
