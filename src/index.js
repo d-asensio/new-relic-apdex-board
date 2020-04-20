@@ -10,5 +10,16 @@ import './styles/index.scss'
 })()
 
 window.onload = () => {
-  console.log('Hello world')
+  const dashboardElement = document.querySelector('.Dashboard')
+  const toggleElement = document.querySelector('.Toggle > input')
+
+  toggleElement.addEventListener('change', () => {
+    const isInListLayout = dashboardElement.classList.contains('Dashboard--listLayout')
+
+    if (isInListLayout) {
+      dashboardElement.classList.remove('Dashboard--listLayout')
+    } else {
+      dashboardElement.classList.add('Dashboard--listLayout')
+    }
+  })
 }
