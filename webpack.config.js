@@ -6,6 +6,7 @@ const {
   NoEmitOnErrorsPlugin
 } = require('webpack')
 
+const CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
@@ -16,6 +17,9 @@ function isDevelopment () {
 
 const SRC_PATH = path.resolve(__dirname, 'src')
 const ENTRY_FILE = path.join(__dirname, 'src/index.js')
+
+const DATA_PATH = path.resolve(__dirname, 'data')
+
 const BUILD_DIR = path.join(__dirname, 'build')
 const MAIN_HTML_FILE = path.join(__dirname, 'public/index.html')
 
@@ -101,6 +105,13 @@ module.exports = {
       template: MAIN_HTML_FILE,
       filename: 'index.html'
     }),
+    new CopyPlugin([
+      {
+        context: DATA_PATH,
+        from: '**/*',
+        to: path.join(BUILD_DIR, 'data')
+      }
+    ]),
     new HotModuleReplacementPlugin(),
     new NoEmitOnErrorsPlugin()
   ]
