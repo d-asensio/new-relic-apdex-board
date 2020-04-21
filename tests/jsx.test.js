@@ -86,6 +86,11 @@ describe('JSX Rumtime', () => {
     expect(inputElement.getAttribute('type')).toBe('text')
   })
 
+  it('creates an element with a data attribute', () => {
+    const inputElement = (<div data-info='whatever' />)
+    expect(inputElement.dataset.info).toBe('whatever')
+  })
+
   it('throws an error while attempting to create an element with a unsupported attribute', () => {
     expect(() =>
       (<input foo='bar' />)

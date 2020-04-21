@@ -39,7 +39,12 @@ function _attributeSupportedByElementOrThrow (attributeName, element) {
 }
 
 function _isAttributeSupportedByElement (attributeName, element) {
+  if (_isDataAttribute(attributeName)) return true
   return attributeName in element
+}
+
+function _isDataAttribute (attributeName) {
+  return attributeName.startsWith('data-')
 }
 
 function _addClassNameToElement (className, element) {
