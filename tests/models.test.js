@@ -67,10 +67,138 @@ describe('Dashboard model', () => {
 
 describe('Host model', () => {
   it('is constructed', () => {
-    const app = new Host({
+    const host = new Host({
       id: 'a2f3d.host.com'
     })
 
-    expect(app).toBeInstanceOf(Host)
+    expect(host).toBeInstanceOf(Host)
+  })
+
+  it('return an empty top apps array when there are no apps', () => {
+    const host = new Host({
+      id: 'a2f3d.host.com'
+    })
+
+    expect(host.getTopApps(10)).toStrictEqual([])
+  })
+
+  it('do not modify an added app', () => {
+    const host = new Host({
+      id: 'a2f3d.host.com'
+    })
+
+    const app = new Application({
+      name: 'A',
+      version: 2,
+      apdex: 55,
+      contributors: [
+        'John Doe'
+      ],
+      host: [
+        'a2f3d.host.com'
+      ]
+    })
+
+    Object.freeze(app)
+
+    host.addApp(app)
+  })
+
+  it('returns an added app', () => {
+    const host = new Host({
+      id: 'a2f3d.host.com'
+    })
+
+    const app = new Application({
+      name: 'A',
+      version: 2,
+      apdex: 55,
+      contributors: [
+        'John Doe'
+      ],
+      host: [
+        'a2f3d.host.com'
+      ]
+    })
+
+    host.addApp(app)
+
+    const topApps = host.getTopApps(10)
+
+    expect(topApps).toStrictEqual([app])
+  })
+
+  it('adds a smaller apdex app in descendent order', () => {
+    const host = new Host({
+      id: 'a2f3d.host.com'
+    })
+
+    const appA = new Application({
+      name: 'A',
+      version: 2,
+      apdex: 55,
+      contributors: [
+        'John Doe'
+      ],
+      host: [
+        'a2f3d.host.com'
+      ]
+    })
+
+    const appB = new Application({
+      name: 'B',
+      version: 2,
+      apdex: 50,
+      contributors: [
+        'John Doe'
+      ],
+      host: [
+        'a2f3d.host.com'
+      ]
+    })
+
+    host.addApp(appA)
+    host.addApp(appB)
+
+    const topApps = host.getTopApps(10)
+
+    expect(topApps).toStrictEqual([appA, appB])
+  })
+
+  it('adds a higher apdex app in descendent order', () => {
+    const host = new Host({
+      id: 'a2f3d.host.com'
+    })
+
+    const appA = new Application({
+      name: 'A',
+      version: 2,
+      apdex: 70,
+      contributors: [
+        'John Doe'
+      ],
+      host: [
+        'a2f3d.host.com'
+      ]
+    })
+
+    const appB = new Application({
+      name: 'B',
+      version: 2,
+      apdex: 82,
+      contributors: [
+        'John Doe'
+      ],
+      host: [
+        'a2f3d.host.com'
+      ]
+    })
+
+    host.addApp(appA)
+    host.addApp(appB)
+
+    const topApps = host.getTopApps(10)
+
+    expect(topApps).toStrictEqual([appB, appA])
   })
 })

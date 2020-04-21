@@ -25,7 +25,7 @@ describe('Host view', () => {
       id: 'a2f3d.host.com'
     })
 
-    host.apps.push(
+    host.addApp(
       new Application({
         name: 'A',
         version: 2,
@@ -71,7 +71,7 @@ describe('Dashboard view', () => {
       id: 'a2f3d.host.com'
     })
 
-    host.apps.push(
+    host.addApp(
       new Application({
         name: 'A',
         version: 2,
