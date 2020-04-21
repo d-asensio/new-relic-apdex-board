@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard service throws an error when trying to get the top apps of a unexisting host 1`] = `"The host identified by \\"unexisting.host.com do not exist.\\""`;
