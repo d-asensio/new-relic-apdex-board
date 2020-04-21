@@ -84,4 +84,16 @@ describe('EventBus', () => {
 
     expect(listener.mock.calls.length).toBe(0)
   })
+
+  it('do not fail when emitting unexisting event', async () => {
+    const eventBus = new EventBus()
+
+    await eventBus.emit('event')
+  })
+
+  it('do not fail when removing unexisting event', async () => {
+    const eventBus = new EventBus()
+
+    eventBus.off('event', () => {})
+  })
 })

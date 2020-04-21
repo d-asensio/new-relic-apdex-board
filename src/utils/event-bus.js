@@ -28,13 +28,13 @@ export class EventBus {
   }
 
   _unregisterEventListener (eventName, listener) {
-    const eventListeners = this._getListenersOfEvent(eventName)
+    const eventListeners = this._getOrCreateEventListeners(eventName)
 
     eventListeners.delete(listener)
   }
 
   async _callEventListeners (eventName, eventData) {
-    const eventListeners = this._getListenersOfEvent(eventName)
+    const eventListeners = this._getOrCreateEventListeners(eventName)
 
     for (const listener of eventListeners) {
       await (async function IIFE (closuredEventData) {
