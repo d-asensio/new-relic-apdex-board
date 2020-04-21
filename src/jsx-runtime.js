@@ -73,7 +73,7 @@ function _appendChildToElement (child, element) {
 }
 
 function _createSafeChildNode (child) {
-  if (child instanceof HTMLElement) {
+  if (child instanceof HTMLElement || child instanceof Text) {
     return child
   }
 

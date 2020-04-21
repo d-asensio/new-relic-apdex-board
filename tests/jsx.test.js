@@ -23,6 +23,16 @@ describe('JSX Rumtime', () => {
     expect(divElement.innerHTML).toMatchSnapshot()
   })
 
+  it('creates an element with a text node', () => {
+    const divElement = (
+      <div>
+        {document.createTextNode('Hello 👋')}
+      </div>
+    )
+
+    expect(divElement.innerHTML).toMatchSnapshot()
+  })
+
   it('creates an element with multiple elements', () => {
     const divElement = (
       <div>

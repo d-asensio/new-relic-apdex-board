@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`JSX Rumtime creates an element with a text node 1`] = `"Hello 👋"`;
+
 exports[`JSX Rumtime creates an element with an array of elements 1`] = `"<span>Child</span><span>Child</span><span>Child</span>"`;
 
 exports[`JSX Rumtime creates an element with another element 1`] = `"<span>Child</span>"`;
