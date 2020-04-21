@@ -1,10 +1,11 @@
 {
   "name": "@newrelic/apdex-board",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "description": "A board to visualize applications grouped by host and sorted by their apdex score",
   "author": "David Asensio Cañas <david.asensio@icloud.com>",
   "license": "MIT",
   "private": true,
+  "main": "src/index.js",
   "scripts": {
     "dev": "webpack-dev-server .",
     "build": "NODE_ENV=production webpack",
