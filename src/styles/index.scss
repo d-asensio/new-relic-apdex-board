@@ -72,6 +72,10 @@ body {
     grid-gap: 30px;
 
     will-change: display;
+
+    > * {
+      align-self: start;
+    }
   }
 
   &--listLayout &__Content {
