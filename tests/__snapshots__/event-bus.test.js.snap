@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EventBus throws an error if the passed listener to "eventBus.off()" is not a function 1`] = `"The event listener must be a function."`;
+
+exports[`EventBus throws an error if the passed listener to "eventBus.on()" is not a function 1`] = `"The event listener must be a function."`;
