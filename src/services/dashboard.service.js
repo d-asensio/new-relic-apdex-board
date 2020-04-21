@@ -18,11 +18,9 @@ export class DashboardService {
   }
 
   getTopAppsByHost (hostId) {
-    const host = this._getHostById(hostId)
+    this._hostExistsOrThrow(hostId)
 
-    if (host === null) {
-      this._throwHostNotExists(hostId)
-    }
+    const host = this._getHostById(hostId)
 
     return host.getTopApps(25)
   }
@@ -53,17 +51,17 @@ export class DashboardService {
   }
 
   _getOrCreateHostById (hostId) {
-    const host = this._getHostById(hostId)
-
-    if (host === null) {
+    if (!this._hostExists(hostId)) {
       return this._createHost(hostId)
     }
+
+    const host = this._getHostById(hostId)
 
     return host
   }
 
   _getHostById (hostId) {
-    return this._dashboard.hosts.get(hostId) || null
+    return this._dashboard.hosts.get(hostId)
   }
 
   _createHost (hostId) {
@@ -73,9 +71,15 @@ export class DashboardService {
     return host
   }
 
-  _throwHostNotExists (unexistingId) {
-    throw new Error(
-      `The host identified by "${unexistingId} do not exist."`
-    )
+  _hostExistsOrThrow (hostId) {
+    if (!this._hostExists(hostId)) {
+      throw new Error(
+        `The host identified by "${hostId} do not exist."`
+      )
+    }
+  }
+
+  _hostExists (hostId) {
+    return this._dashboard.hosts.has(hostId)
   }
 }
