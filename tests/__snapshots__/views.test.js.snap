@@ -1,5 +1,77 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Dashboard view is has the proper structure 1`] = `
+<div
+  class="Dashboard"
+>
+  <div
+    class="Dashboard__Header"
+  >
+    <div
+      class="Dashboard__HeaderInfo"
+    >
+      <div
+        class="Dashboard__Title"
+      >
+        Apps by Host
+      </div>
+      <div
+        class="Dashboard__Caption"
+      >
+        for user 
+        some.user@newrelic.com
+      </div>
+    </div>
+    <div
+      class="Dashboard__HeaderControls"
+    >
+      <label
+        class="Toggle"
+      >
+        <input
+          type="checkbox"
+        />
+        <span
+          class="Toggle__Mark"
+        />
+        Show as list
+      </label>
+    </div>
+  </div>
+  <div
+    class="Dashboard__Content"
+  >
+    <div
+      class="Host"
+    >
+      <div
+        class="Host__Title"
+      >
+        a2f3d.host.com
+      </div>
+      <div
+        class="Host__AppList"
+      >
+        <div
+          class="Host__App"
+        >
+          <div
+            class="Host__AppApex"
+          >
+            55
+          </div>
+          <div
+            class="Host__AppName"
+          >
+            A
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Host view is has the proper structure 1`] = `
 <div
   class="Host"
