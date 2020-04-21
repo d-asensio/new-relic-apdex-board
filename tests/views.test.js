@@ -88,6 +88,35 @@ describe('Dashboard view', () => {
 
     expect(dashboardElement).toMatchSnapshot()
   })
+
+  it('changes the toggle text when the user clicks it', () => {
+    const dashboardView = new DashboardView()
+    const dashboard = new Dashboard({
+      user: 'some.user@newrelic.com'
+    })
+
+    const dashboardElement = dashboardView.create(dashboard)
+
+    const toggleElement = dashboardElement.querySelector('.Toggle')
+    toggleElement.click()
+
+    expect(dashboardElement).toMatchSnapshot()
+  })
+})
+
+it('changes the toggle text back when the user clicks it twice', () => {
+  const dashboardView = new DashboardView()
+  const dashboard = new Dashboard({
+    user: 'some.user@newrelic.com'
+  })
+
+  const dashboardElement = dashboardView.create(dashboard)
+
+  const toggleElement = dashboardElement.querySelector('.Toggle')
+  toggleElement.click()
+  toggleElement.click()
+
+  expect(dashboardElement).toMatchSnapshot()
 })
 
 describe('Toggle view', () => {

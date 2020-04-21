@@ -2,10 +2,21 @@
 import jsx from '../jsx-runtime'
 
 import { HostView } from './host.view'
+import { ToggleView } from './toggle.view'
+
+const LAYOUT_LIST_CLASSNAME = 'Dashboard--listLayout'
+
+const LAYOUT_GRID_TEXT = 'Show as list'
+const LAYOUT_LIST_TEXT = 'Show as an awesome grid'
 
 export class DashboardView {
+  constructor () {
+    this._rootElement = null
+    this._toggleView = null
+  }
+
   create (dashboard) {
-    return (
+    this._rootElement = (
       <div className='Dashboard'>
         <div className='Dashboard__Header'>
           <div className='Dashboard__HeaderInfo'>
@@ -15,11 +26,7 @@ export class DashboardView {
             </div>
           </div>
           <div className='Dashboard__HeaderControls'>
-            <label className='Toggle'>
-              <input type='checkbox' />
-              <span className='Toggle__Mark' />
-              Show as list
-            </label>
+            {this._createToggleElement()}
           </div>
         </div>
         <div className='Dashboard__Content'>
@@ -27,6 +34,10 @@ export class DashboardView {
         </div>
       </div>
     )
+
+    this._setLayoutToGrid()
+
+    return this._rootElement
   }
 
   _createHostElements (hosts) {
@@ -41,5 +52,37 @@ export class DashboardView {
     }
 
     return hostViews
+  }
+
+  _createToggleElement () {
+    this._toggleView = new ToggleView()
+
+    this._attachToggleEvents()
+
+    return this._toggleView.create()
+  }
+
+  _attachToggleEvents () {
+    this._toggleView.onToggle(
+      this._handleListLayoutToggle.bind(this)
+    )
+  }
+
+  _handleListLayoutToggle ({ isActive }) {
+    if (isActive) {
+      this._setLayoutToList()
+    } else {
+      this._setLayoutToGrid()
+    }
+  }
+
+  _setLayoutToList () {
+    this._rootElement.classList.add(LAYOUT_LIST_CLASSNAME)
+    this._toggleView.setLabelText(LAYOUT_LIST_TEXT)
+  }
+
+  _setLayoutToGrid () {
+    this._rootElement.classList.remove(LAYOUT_LIST_CLASSNAME)
+    this._toggleView.setLabelText(LAYOUT_GRID_TEXT)
   }
 }
