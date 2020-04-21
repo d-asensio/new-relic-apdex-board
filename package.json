@@ -11,12 +11,13 @@
     "prebuild": "rimraf build",
     "lint": "standardx",
     "lint:fix": "standardx --fix",
-    "test": "jest --coverage"
+    "test": "jest --coverage --verbose",
+    "test:watch": "yarn test --watch"
   },
   "lint-staged": {
     "*.js": [
       "yarn lint:fix",
-      "yarn test"
+      "jest --bail --findRelatedTests"
     ]
   },
   "husky": {
