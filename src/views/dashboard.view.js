@@ -23,13 +23,13 @@ export class DashboardView {
           </div>
         </div>
         <div className='Dashboard__Content'>
-          {this._createHostViews(dashboard.hosts)}
+          {this._createHostElements(dashboard.hosts)}
         </div>
       </div>
     )
   }
 
-  _createHostViews (hosts) {
+  _createHostElements (hosts) {
     const hostViews = []
 
     for (const [, host] of hosts) {
