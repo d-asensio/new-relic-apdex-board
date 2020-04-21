@@ -1,22 +1,52 @@
 export default function createElement (tag, props, ...children) {
   const element = document.createElement(tag)
 
-  _addPropsToElement(props, element)
+  if (props !== null) {
+    _addPropsToElement(props, element)
+  }
+
   _appendChildrenToElement(children, element)
 
   return element
 }
 
 function _addPropsToElement (props, element) {
-  if (props === null) return
-  const { className } = props
+  const { className, ...attributes } = props
+
+  _addAttributesToElement(attributes, element)
 
   if (className) {
-    const sanitizedClassNames = _sanitizeClassName(className)
+    _addClassNameToElement(className, element)
+  }
+}
 
-    for (const sanitizedClass of sanitizedClassNames) {
-      element.classList.add(sanitizedClass)
-    }
+function _addAttributesToElement (attributes, element) {
+  const attributeEntries = Object.entries(attributes)
+
+  for (const [attrName, attrValue] of attributeEntries) {
+    _attributeSupportedByElementOrThrow(attrName, element)
+
+    element.setAttribute(attrName, attrValue)
+  }
+}
+
+function _attributeSupportedByElementOrThrow (attributeName, element) {
+  if (!_isAttributeSupportedByElement(attributeName, element)) {
+    throw new Error(
+      `A "${element.tagName.toLowerCase()}" element do not support the attribute "${attributeName}".`
+    )
+  }
+}
+
+function _isAttributeSupportedByElement (attributeName, element) {
+  return attributeName in element
+}
+
+function _addClassNameToElement (className, element) {
+  const sanitizedClassNames = _sanitizeClassName(className)
+
+  for (const sanitizedClass of sanitizedClassNames) {
+    element.classList.add(sanitizedClass)
   }
 }
 
@@ -37,11 +67,15 @@ function _appendChildrenToElement (children, element) {
 }
 
 function _appendChildToElement (child, element) {
-  const nodeToAppend = (
-    child instanceof HTMLElement
-      ? child
-      : document.createTextNode(child)
-  )
+  const safeChildNode = _createSafeChildNode(child, element)
 
-  element.appendChild(nodeToAppend)
+  element.appendChild(safeChildNode)
+}
+
+function _createSafeChildNode (child) {
+  if (child instanceof HTMLElement) {
+    return child
+  }
+
+  return document.createTextNode(child)
 }

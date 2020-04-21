@@ -19,3 +19,5 @@ DOMTokenList {
 `;
 
 exports[`JSX Rumtime creates an element with multiple elements 1`] = `"<span>Child</span><span>Child</span><span>Child</span>"`;
+
+exports[`JSX Rumtime throws an error while attempting to create an element with a unsupported attribute 1`] = `"A \\"input\\" element do not support the attribute \\"foo\\"."`;

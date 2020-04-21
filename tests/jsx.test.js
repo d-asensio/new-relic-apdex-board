@@ -70,4 +70,15 @@ describe('JSX Rumtime', () => {
     const divElement = (<div className={null} />)
     expect(divElement.classList.length).toBe(0)
   })
+
+  it('creates an element with an attribute', () => {
+    const inputElement = (<input type='text' />)
+    expect(inputElement.getAttribute('type')).toBe('text')
+  })
+
+  it('throws an error while attempting to create an element with a unsupported attribute', () => {
+    expect(() =>
+      (<input foo='bar' />)
+    ).toThrowErrorMatchingSnapshot()
+  })
 })
