@@ -13,6 +13,46 @@ describe('Application model', () => {
 
     expect(app).toBeInstanceOf(Application)
   })
+
+  it('can compared to another app', () => {
+    const appA = new Application({
+      name: 'A',
+      version: 2,
+      apdex: 55,
+      contributors: []
+    })
+
+    const appB = new Application({
+      name: 'B',
+      version: 2,
+      apdex: 60,
+      contributors: []
+    })
+
+    const comparison = appA.compareTo(appB)
+
+    expect(comparison).toBe(-5)
+  })
+
+  it('has a comparator that can be used to sort in descencent order', () => {
+    const appA = new Application({
+      name: 'A',
+      version: 2,
+      apdex: 55,
+      contributors: []
+    })
+
+    const appB = new Application({
+      name: 'B',
+      version: 2,
+      apdex: 60,
+      contributors: []
+    })
+
+    const comparison = Application.byApdexInDescOrder(appA, appB)
+
+    expect(comparison).toBe(5)
+  })
 })
 
 describe('Dashboard model', () => {
