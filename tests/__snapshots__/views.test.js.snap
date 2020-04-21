@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Host view is has the proper structure 1`] = `
+<div
+  class="Host"
+>
+  <div
+    class="Host__Title"
+  >
+    a2f3d.host.com
+  </div>
+  <div
+    class="Host__AppList"
+  >
+    <div
+      class="Host__App"
+    >
+      <div
+        class="Host__AppApex"
+      >
+        55
+      </div>
+      <div
+        class="Host__AppName"
+      >
+        A
+      </div>
+    </div>
+  </div>
+</div>
+`;
