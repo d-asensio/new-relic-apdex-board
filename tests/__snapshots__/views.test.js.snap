@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Dashboard view is has the proper structure 1`] = `
+exports[`Dashboard view has the proper structure 1`] = `
 <div
   class="Dashboard"
 >
@@ -72,7 +72,7 @@ exports[`Dashboard view is has the proper structure 1`] = `
 </div>
 `;
 
-exports[`Host view is has the proper structure 1`] = `
+exports[`Host view has the proper structure 1`] = `
 <div
   class="Host"
 >
@@ -100,4 +100,18 @@ exports[`Host view is has the proper structure 1`] = `
     </div>
   </div>
 </div>
+`;
+
+exports[`Toggle view has the proper structure 1`] = `
+<label
+  class="Toggle"
+>
+  <input
+    type="checkbox"
+  />
+  <span
+    class="Toggle__Mark"
+  />
+  
+</label>
 `;

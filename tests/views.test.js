@@ -1,5 +1,5 @@
 import { Host, Application, Dashboard } from '../src/models'
-import { HostView, DashboardView } from '../src/views'
+import { HostView, DashboardView, ToggleView } from '../src/views'
 
 describe('Host view', () => {
   it('is constructed', () => {
@@ -19,7 +19,7 @@ describe('Host view', () => {
     expect(hostElement).toBeInstanceOf(HTMLElement)
   })
 
-  it('is has the proper structure', () => {
+  it('has the proper structure', () => {
     const hostView = new HostView()
     const host = new Host({
       id: 'a2f3d.host.com'
@@ -60,7 +60,7 @@ describe('Dashboard view', () => {
     expect(dashboardElement).toBeInstanceOf(HTMLElement)
   })
 
-  it('is has the proper structure', () => {
+  it('has the proper structure', () => {
     const dashboardView = new DashboardView()
 
     const dashboard = new Dashboard({
@@ -87,5 +87,64 @@ describe('Dashboard view', () => {
     const dashboardElement = dashboardView.create(dashboard)
 
     expect(dashboardElement).toMatchSnapshot()
+  })
+})
+
+describe('Toggle view', () => {
+  it('is constructed', () => {
+    const toggleView = new ToggleView()
+
+    expect(toggleView).toBeInstanceOf(ToggleView)
+  })
+
+  it('is created', () => {
+    const toggleView = new ToggleView()
+
+    const toggleElement = toggleView.create()
+
+    expect(toggleElement).toBeInstanceOf(HTMLElement)
+  })
+
+  it('has the proper structure', () => {
+    const toggleView = new ToggleView()
+
+    const toggleElement = toggleView.create()
+
+    expect(toggleElement).toMatchSnapshot()
+  })
+
+  it('defines the text of the label', () => {
+    const labelText = 'This is the text of the label'
+    const toggleView = new ToggleView()
+
+    toggleView.setLabelText(labelText)
+
+    const toggleElement = toggleView.create()
+
+    expect(toggleElement.textContent).toBe(labelText)
+  })
+
+  it('changes the text of the label (after creating)', () => {
+    const labelText = 'This is the text of the label'
+    const toggleView = new ToggleView()
+
+    const toggleElement = toggleView.create()
+
+    toggleView.setLabelText(labelText)
+
+    expect(toggleElement.textContent).toBe(labelText)
+  })
+
+  it('emits an event when the user clicks on it', () => {
+    const handler = jest.fn()
+    const toggleView = new ToggleView()
+
+    toggleView.onToggle(handler)
+
+    const toggleElement = toggleView.create()
+
+    toggleElement.click()
+
+    expect(handler.mock.calls.length).toBe(1)
   })
 })
