@@ -17,53 +17,36 @@ export class Host {
   }
 
   _insertAppInPosition (app) {
-    if (this._isSmallestApp(app)) {
-      this._apps.push(app)
-    } else {
-      const appInsertionIndex = this._findAppInsertionIndex(app)
-
-      this._insertAppAtIndex(app, appInsertionIndex)
-    }
+    const appInsertionIndex = this._binarySearch(app)
+    this._insertAppAtIndex(app, appInsertionIndex)
   }
 
   _removeAppFromPosition (app) {
-    const appIndex = this._findAppIndexById(app.id)
+    const appIndex = this._binarySearch(app)
 
     this._indexExistOrThrow(appIndex)
     this._removeAppAtIndex(appIndex)
   }
 
-  _isSmallestApp (app) {
-    if (this._isEmpty()) {
-      return true
+  _binarySearch (app) {
+    let startIndex = 0
+    let endIndex = this._apps.length - 1
+    let currentIndex
+
+    while (startIndex <= endIndex) {
+      currentIndex = (startIndex + endIndex) / 2 | 0
+      const iteratingApp = this._apps[currentIndex]
+
+      if (app.compareTo(iteratingApp) < 0) {
+        startIndex = currentIndex + 1
+      } else if (app.compareTo(iteratingApp) > 0) {
+        endIndex = currentIndex - 1
+      } else {
+        return currentIndex
+      }
     }
 
-    const lastApp = this._getLastApp()
-    return app.compareTo(lastApp) <= 0
-  }
-
-  _isEmpty () {
-    return this._apps.length === 0
-  }
-
-  _getLastApp () {
-    return this._apps[this._apps.length - 1]
-  }
-
-  _findAppInsertionIndex (app) {
-    const nextAppIndex = this._apps.findIndex(
-      comparee => app.compareTo(comparee) >= 0
-    )
-
-    return nextAppIndex
-  }
-
-  _findAppIndexById (appId) {
-    const appIndex = this._apps.findIndex(
-      comparee => comparee.id === appId
-    )
-
-    return appIndex
+    return Math.abs(~endIndex)
   }
 
   _insertAppAtIndex (app, insertionIndex) {
