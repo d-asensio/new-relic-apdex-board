@@ -102,17 +102,17 @@ export class DashboardView {
     }
   }
 
-  _handleListLayoutToggle ({ isActive }) {
+  _handleListLayoutToggle (event) {
     this._eventBus.emit(
       'layoutToggleChange',
-      { isActive }
+      event
     )
   }
 
-  _handleAppClick ({ appId }) {
+  _handleAppClick (event) {
     this._eventBus.emit(
       'appClick',
-      { appId }
+      event
     )
   }
 }
