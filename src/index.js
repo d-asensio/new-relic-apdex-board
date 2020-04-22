@@ -21,9 +21,6 @@ function renderApp () {
   if (document.readyState === 'complete') {
     renderApp()
   } else {
-    document.addEventListener(
-      'DOMContentLoaded',
-      () => renderApp()
-    )
+    window.onload = () => renderApp()
   }
 })()
