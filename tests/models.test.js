@@ -418,7 +418,7 @@ describe('Host model', () => {
     expect(topApps).toStrictEqual([app])
   })
 
-  it('adds a smaller apdex app in descendent order', () => {
+  it('adds a smaller apdex apps in descendent order', () => {
     const host = new Host({
       id: 'a2f3d.host.com'
     })
@@ -447,12 +447,25 @@ describe('Host model', () => {
       ]
     })
 
+    const appC = new Application({
+      name: 'B',
+      version: 2,
+      apdex: 52,
+      contributors: [
+        'John Doe'
+      ],
+      host: [
+        'a2f3d.host.com'
+      ]
+    })
+
     host.addApp(appA)
     host.addApp(appB)
+    host.addApp(appC)
 
     const topApps = host.getTopApps(10)
 
-    expect(topApps).toStrictEqual([appA, appB])
+    expect(topApps).toStrictEqual([appA, appC, appB])
   })
 
   it('adds a higher apdex app in descendent order', () => {

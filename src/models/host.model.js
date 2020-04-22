@@ -55,7 +55,7 @@ export class Host {
       comparee => app.compareTo(comparee) >= 0
     )
 
-    return nextAppIndex - 1
+    return nextAppIndex
   }
 
   _findAppIndexById (appId) {
