@@ -101,10 +101,17 @@ body {
   &__App {
     display: flex;
 
+    user-select: none;
+    cursor: pointer;
+
     margin-bottom: 23px;
 
     &:last-child {
       margin-bottom: initial;
+    }
+
+    > * {
+      pointer-events: none;
     }
   }
 
