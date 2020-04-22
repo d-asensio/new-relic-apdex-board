@@ -8,8 +8,8 @@ export class Host {
     this._insertAppInPosition(app)
   }
 
-  removeApp (appId) {
-    this._removeAppFromPosition(appId)
+  removeApp (app) {
+    this._removeAppFromPosition(app)
   }
 
   getTopApps (nTopApps) {
@@ -26,11 +26,10 @@ export class Host {
     }
   }
 
-  _removeAppFromPosition (appId) {
-    const appIndex = this._findAppIndexById(appId)
+  _removeAppFromPosition (app) {
+    const appIndex = this._findAppIndexById(app.id)
 
     this._indexExistOrThrow(appIndex)
-
     this._removeAppAtIndex(appIndex)
   }
 

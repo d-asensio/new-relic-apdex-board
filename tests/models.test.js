@@ -537,7 +537,7 @@ describe('Host model', () => {
     host.addApp(appA)
     host.addApp(appB)
 
-    host.removeApp(appB.id)
+    host.removeApp(appB)
 
     const topApps = host.getTopApps(10)
 
@@ -589,9 +589,9 @@ describe('Host model', () => {
     host.addApp(appA)
     host.addApp(appB)
 
-    host.removeApp(appA.id)
-    host.removeApp(appC.id)
-    host.removeApp(appB.id)
+    host.removeApp(appA)
+    host.removeApp(appC)
+    host.removeApp(appB)
 
     const topApps = host.getTopApps(10)
 
@@ -603,8 +603,20 @@ describe('Host model', () => {
       id: 'a2f3d.host.com'
     })
 
+    const appA = new Application({
+      name: 'A',
+      version: 2,
+      apdex: 19,
+      contributors: [
+        'John Doe'
+      ],
+      host: [
+        'a2f3d.host.com'
+      ]
+    })
+
     expect(() => {
-      host.removeApp('app_10')
+      host.removeApp(appA)
     }).toThrowErrorMatchingSnapshot()
   })
 })
