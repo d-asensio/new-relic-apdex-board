@@ -31,6 +31,10 @@ export class DashboardService {
     return host.getTopApps(25)
   }
 
+  getAppById (appId) {
+    return this._dashboard.getApp(appId)
+  }
+
   async _fetchAppRecordsFromApi () {
     const res = await fetch(API_URL)
     return res.json()

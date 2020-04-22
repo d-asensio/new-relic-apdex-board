@@ -57,4 +57,16 @@ describe('Dashboard service', () => {
 
     expect(topApps.length).toEqual(25)
   })
+
+  it('returns an app by id', async () => {
+    fetch.mockResponseOnce(smallResponseMock)
+
+    const dashboardService = new DashboardService()
+    await dashboardService.init()
+
+    const [appA] = dashboardService.getTopAppsByHost('7e6272f7-098e.dakota.biz')
+    const gotApp = dashboardService.getAppById(appA.id)
+
+    expect(gotApp).toBe(appA)
+  })
 })
