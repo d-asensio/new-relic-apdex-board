@@ -1,7 +1,8 @@
 
 .Host {
   background: #FFF;
-  padding: 30px;
+  
+  @include sp-inset($space--large);
 
   &__Title {
     font-size: 16px;
@@ -11,7 +12,7 @@
 
     color: #000;
 
-    margin-bottom: 23px;
+    @include sp-stack($space--medium);
   }
 
   &__App {
@@ -20,14 +21,14 @@
     user-select: none;
     cursor: pointer;
 
-    margin-bottom: 23px;
-
-    &:last-child {
-      margin-bottom: initial;
-    }
-
     > * {
       pointer-events: none;
+    }
+
+    @include sp-stack($space--medium);
+
+    &:last-child {
+      @include sp-stack($space--none);
     }
   }
 
@@ -39,7 +40,7 @@
 
     color: #4A4A4A;
 
-    margin-right: 23px;
+    @include sp-inline($space--medium);
   }
 
   &__AppName {

@@ -1,7 +1,12 @@
 @import "reset";
-@import "views/views";
+
+@import "tokens/all";
+@import "utilities/all";
+
+@import "views/all";
 
 body {
   background: #f5f5f5;
-  padding: 30px;
+  
+  @include sp-inset($space--large);
 }

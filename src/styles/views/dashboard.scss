@@ -5,16 +5,16 @@
     justify-content: space-between;
     align-items: flex-end;
 
-    margin-bottom: 30px;
+    @include sp-stack($space--large);
   }
 
   &__HeaderInfo {
     display: flex;
     align-items: baseline;
 
-    margin-right: 30px;
-
     min-width: 0;
+
+    @include sp-inline($space--large);
   }
 
   &__Title {
@@ -25,7 +25,7 @@
     
     color: #000;
 
-    margin-right: 8px;
+    @include sp-inline($space--small);
   }
 
   &__Caption {
@@ -50,7 +50,7 @@
   &__Content {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 30px;
+    grid-gap: $space--large;
 
     will-change: display;
 

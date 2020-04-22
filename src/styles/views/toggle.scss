@@ -10,11 +10,7 @@
   display: flex;
 
   input {
-    /* visually hidden */
-    position: absolute;
-    opacity: 0;
-    height: 0;
-    width: 0;
+    @include visually-hidden();
   }
 
   &__Mark {
@@ -27,10 +23,10 @@
 
     background: #FFF;
 
-    margin-right: 8px;
-
     border-radius: 5px;
     border: 1px solid #E5E5E5;
+
+    @include sp-inline($space--small);
   
     &::after {  
       width: 10px;
