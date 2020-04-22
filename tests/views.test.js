@@ -82,7 +82,7 @@ describe('Dashboard view', () => {
       })
     )
 
-    dashboard.hosts.set(host.id, host)
+    dashboard.addHost(host)
 
     const dashboardElement = dashboardView.create(dashboard)
 

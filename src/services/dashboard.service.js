@@ -12,9 +12,15 @@ export class DashboardService {
   async init () {
     const appRecords = await this._fetchAppRecordsFromApi()
 
-    this._createAppModelsFromRecords(appRecords)
-    this._sortAppsByApdex()
-    this._linkHostsWithApps()
+    const sortedRecords = this._sortAppRecordsByApdex(appRecords)
+    this._createAppModelsFromRecords(sortedRecords)
+  }
+
+  addAppToHosts (app, hosts) {
+    for (const hostId of hosts) {
+      const host = this._getOrCreateHostById(hostId)
+      host.addApp(app)
+    }
   }
 
   getTopAppsByHost (hostId) {
@@ -30,23 +36,16 @@ export class DashboardService {
     return res.json()
   }
 
+  _sortAppRecordsByApdex (appRecords) {
+    return appRecords.sort(Application.byApdexInDescOrder)
+  }
+
   _createAppModelsFromRecords (appRecords) {
-    this._dashboard.apps = appRecords.map(
-      appRecord => new Application(appRecord)
-    )
-  }
+    for (const { host, ...appData } of appRecords) {
+      const app = new Application(appData)
 
-  _sortAppsByApdex () {
-    this._dashboard.apps.sort(Application.byApdexInDescOrder)
-  }
-
-  _linkHostsWithApps () {
-    for (const app of this._dashboard.apps) {
-      for (const hostId of app.host) {
-        const host = this._getOrCreateHostById(hostId)
-
-        host.addApp(app)
-      }
+      this.addAppToHosts(app, host)
+      this._dashboard.addApp(app)
     }
   }
 
@@ -61,12 +60,13 @@ export class DashboardService {
   }
 
   _getHostById (hostId) {
-    return this._dashboard.hosts.get(hostId)
+    return this._dashboard.getHost(hostId)
   }
 
   _createHost (hostId) {
     const host = new Host({ id: hostId })
-    this._dashboard.hosts.set(host.id, host)
+
+    this._dashboard.addHost(host)
 
     return host
   }
@@ -80,6 +80,6 @@ export class DashboardService {
   }
 
   _hostExists (hostId) {
-    return this._dashboard.hosts.has(hostId)
+    return this._dashboard.hasHost(hostId)
   }
 }

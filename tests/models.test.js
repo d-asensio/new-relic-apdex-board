@@ -14,7 +14,20 @@ describe('Application model', () => {
     expect(app).toBeInstanceOf(Application)
   })
 
-  it('can compared to another app', () => {
+  it('generates an id', () => {
+    const app = new Application({
+      name: 'A',
+      version: 2,
+      apdex: 55,
+      contributors: [
+        'John Doe'
+      ]
+    })
+
+    expect(app.id).toBeDefined()
+  })
+
+  it('can be compared to another app', () => {
     const appA = new Application({
       name: 'A',
       version: 2,
@@ -57,11 +70,133 @@ describe('Application model', () => {
 
 describe('Dashboard model', () => {
   it('is constructed', () => {
-    const app = new Dashboard({
+    const dashboard = new Dashboard({
       user: 'some.one@newrelic.com'
     })
 
-    expect(app).toBeInstanceOf(Dashboard)
+    expect(dashboard).toBeInstanceOf(Dashboard)
+  })
+
+  it('adds an app', () => {
+    const dashboard = new Dashboard({
+      user: 'some.one@newrelic.com'
+    })
+
+    const app = new Application({
+      name: 'A',
+      version: 2,
+      apdex: 55,
+      contributors: []
+    })
+
+    dashboard.addApp(app)
+
+    const hasApp = dashboard.hasApp(app.id)
+
+    expect(hasApp).toBe(true)
+  })
+
+  it('gets an app', () => {
+    const dashboard = new Dashboard({
+      user: 'some.one@newrelic.com'
+    })
+
+    const app = new Application({
+      name: 'A',
+      version: 2,
+      apdex: 55,
+      contributors: []
+    })
+
+    dashboard.addApp(app)
+
+    const gotApp = dashboard.getApp(app.id)
+
+    expect(app).toBe(gotApp)
+  })
+
+  it('do not modify apps when adding', () => {
+    const dashboard = new Dashboard({
+      user: 'some.one@newrelic.com'
+    })
+
+    const app = new Application({
+      name: 'A',
+      version: 2,
+      apdex: 55,
+      contributors: []
+    })
+
+    Object.freeze(app)
+
+    dashboard.addApp(app)
+  })
+
+  it('adds a host', () => {
+    const dashboard = new Dashboard({
+      user: 'some.one@newrelic.com'
+    })
+
+    const host = new Host({
+      id: 'a2f3d.host.com'
+    })
+
+    dashboard.addHost(host)
+
+    const hasHost = dashboard.hasHost(host.id)
+
+    expect(hasHost).toBe(true)
+  })
+
+  it('gets a host', () => {
+    const dashboard = new Dashboard({
+      user: 'some.one@newrelic.com'
+    })
+
+    const host = new Host({
+      id: 'a2f3d.host.com'
+    })
+
+    dashboard.addHost(host)
+
+    const gotHost = dashboard.getHost(host.id)
+
+    expect(gotHost).toBe(host)
+  })
+
+  it('gets multiple hosts', () => {
+    const dashboard = new Dashboard({
+      user: 'some.one@newrelic.com'
+    })
+
+    const hostA = new Host({
+      id: 'a2f3d.hostA.com'
+    })
+
+    const hostB = new Host({
+      id: 'a2f3d.hostB.com'
+    })
+
+    dashboard.addHost(hostA)
+    dashboard.addHost(hostB)
+
+    const allHosts = dashboard.getAllHosts()
+
+    expect(allHosts).toStrictEqual([hostA, hostB])
+  })
+
+  it('do not modify hosts when adding', () => {
+    const dashboard = new Dashboard({
+      user: 'some.one@newrelic.com'
+    })
+
+    const host = new Host({
+      id: 'a2f3d.host.com'
+    })
+
+    Object.freeze(host)
+
+    dashboard.addHost(host)
   })
 })
 

@@ -1,10 +1,13 @@
+import { uniqueId } from '../utils'
+
 export class Application {
-  constructor ({ name, apdex, version, host, contributors }) {
+  constructor ({ name, apdex, version, contributors }) {
+    this.id = uniqueId('app_')
+
     this.name = name
     this.apdex = apdex
     this.version = version
     this.contributors = contributors
-    this.host = host
   }
 
   compareTo (comparee) {
@@ -12,6 +15,6 @@ export class Application {
   }
 
   static byApdexInDescOrder (appA, appB) {
-    return appB.compareTo(appA)
+    return appB.apdex - appA.apdex
   }
 }

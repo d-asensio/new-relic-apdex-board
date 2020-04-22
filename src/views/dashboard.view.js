@@ -30,7 +30,7 @@ export class DashboardView {
           </div>
         </div>
         <div className='Dashboard__Content'>
-          {this._createHostElements(dashboard.hosts)}
+          {this._createHostElements(dashboard.getAllHosts())}
         </div>
       </div>
     )
@@ -43,7 +43,7 @@ export class DashboardView {
   _createHostElements (hosts) {
     const hostViews = []
 
-    for (const [, host] of hosts) {
+    for (const host of hosts) {
       const hostView = new HostView()
 
       hostViews.push(
