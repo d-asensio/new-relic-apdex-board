@@ -1,49 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Dashboard view changes the toggle text when the user clicks it 1`] = `
-<div
-  class="Dashboard Dashboard--listLayout"
->
-  <div
-    class="Dashboard__Header"
-  >
-    <div
-      class="Dashboard__HeaderInfo"
-    >
-      <div
-        class="Dashboard__Title"
-      >
-        Apps by Host
-      </div>
-      <div
-        class="Dashboard__Caption"
-      >
-        for user 
-        some.user@newrelic.com
-      </div>
-    </div>
-    <div
-      class="Dashboard__HeaderControls"
-    >
-      <label
-        class="Toggle"
-      >
-        <input
-          type="checkbox"
-        />
-        <span
-          class="Toggle__Mark"
-        />
-        Show as an awesome grid
-      </label>
-    </div>
-  </div>
-  <div
-    class="Dashboard__Content"
-  />
-</div>
-`;
-
 exports[`Dashboard view has the proper structure 1`] = `
 <div
   class="Dashboard"
@@ -114,6 +70,94 @@ exports[`Dashboard view has the proper structure 1`] = `
       </div>
     </div>
   </div>
+</div>
+`;
+
+exports[`Dashboard view has the propper structure after toggling the layout to grid 1`] = `
+<div
+  class="Dashboard"
+>
+  <div
+    class="Dashboard__Header"
+  >
+    <div
+      class="Dashboard__HeaderInfo"
+    >
+      <div
+        class="Dashboard__Title"
+      >
+        Apps by Host
+      </div>
+      <div
+        class="Dashboard__Caption"
+      >
+        for user 
+        some.user@newrelic.com
+      </div>
+    </div>
+    <div
+      class="Dashboard__HeaderControls"
+    >
+      <label
+        class="Toggle"
+      >
+        <input
+          type="checkbox"
+        />
+        <span
+          class="Toggle__Mark"
+        />
+        Show as list
+      </label>
+    </div>
+  </div>
+  <div
+    class="Dashboard__Content"
+  />
+</div>
+`;
+
+exports[`Dashboard view has the propper structure after toggling the layout to list 1`] = `
+<div
+  class="Dashboard Dashboard--listLayout"
+>
+  <div
+    class="Dashboard__Header"
+  >
+    <div
+      class="Dashboard__HeaderInfo"
+    >
+      <div
+        class="Dashboard__Title"
+      >
+        Apps by Host
+      </div>
+      <div
+        class="Dashboard__Caption"
+      >
+        for user 
+        some.user@newrelic.com
+      </div>
+    </div>
+    <div
+      class="Dashboard__HeaderControls"
+    >
+      <label
+        class="Toggle"
+      >
+        <input
+          type="checkbox"
+        />
+        <span
+          class="Toggle__Mark"
+        />
+        Show as an awesome grid
+      </label>
+    </div>
+  </div>
+  <div
+    class="Dashboard__Content"
+  />
 </div>
 `;
 

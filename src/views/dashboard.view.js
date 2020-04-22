@@ -1,6 +1,8 @@
 /** @jsx jsx */
 import jsx from '../jsx-runtime'
 
+import { EventBus } from '../utils'
+
 import { HostView } from './host.view'
 import { ToggleView } from './toggle.view'
 
@@ -11,8 +13,12 @@ const LAYOUT_LIST_TEXT = 'Show as an awesome grid'
 
 export class DashboardView {
   constructor () {
+    this._eventBus = new EventBus()
+
     this._rootElement = null
+
     this._toggleView = null
+    this._hostViews = []
   }
 
   create (dashboard) {
@@ -35,23 +41,43 @@ export class DashboardView {
       </div>
     )
 
-    this._setLayoutToGrid()
+    this.setLayoutToGrid()
 
     return this._rootElement
   }
 
+  setLayoutToList () {
+    this._rootElement.classList.add(LAYOUT_LIST_CLASSNAME)
+    this._toggleView.setLabelText(LAYOUT_LIST_TEXT)
+  }
+
+  setLayoutToGrid () {
+    this._rootElement.classList.remove(LAYOUT_LIST_CLASSNAME)
+    this._toggleView.setLabelText(LAYOUT_GRID_TEXT)
+  }
+
+  onClickApp (handler) {
+    this._eventBus.on('appClick', handler)
+  }
+
+  onToggleLayout (handler) {
+    this._eventBus.on('layoutToggleChange', handler)
+  }
+
   _createHostElements (hosts) {
-    const hostViews = []
+    const hostElements = []
 
     for (const host of hosts) {
       const hostView = new HostView()
+      const hostElement = hostView.create(host)
 
-      hostViews.push(
-        hostView.create(host)
-      )
+      this._hostViews.push(hostView)
+      hostElements.push(hostElement)
     }
 
-    return hostViews
+    this._attachHostEvents()
+
+    return hostElements
   }
 
   _createToggleElement () {
@@ -68,21 +94,25 @@ export class DashboardView {
     )
   }
 
-  _handleListLayoutToggle ({ isActive }) {
-    if (isActive) {
-      this._setLayoutToList()
-    } else {
-      this._setLayoutToGrid()
+  _attachHostEvents () {
+    for (const hostView of this._hostViews) {
+      hostView.onClickApp(
+        this._handleAppClick.bind(this)
+      )
     }
   }
 
-  _setLayoutToList () {
-    this._rootElement.classList.add(LAYOUT_LIST_CLASSNAME)
-    this._toggleView.setLabelText(LAYOUT_LIST_TEXT)
+  _handleListLayoutToggle ({ isActive }) {
+    this._eventBus.emit(
+      'layoutToggleChange',
+      { isActive }
+    )
   }
 
-  _setLayoutToGrid () {
-    this._rootElement.classList.remove(LAYOUT_LIST_CLASSNAME)
-    this._toggleView.setLabelText(LAYOUT_GRID_TEXT)
+  _handleAppClick ({ appId }) {
+    this._eventBus.emit(
+      'appClick',
+      { appId }
+    )
   }
 }

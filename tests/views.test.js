@@ -142,7 +142,7 @@ describe('Dashboard view', () => {
     expect(dashboardElement).toMatchSnapshot()
   })
 
-  it('changes the toggle text when the user clicks it', () => {
+  it('has the propper structure after toggling the layout to list', () => {
     const dashboardView = new DashboardView()
     const dashboard = new Dashboard({
       user: 'some.user@newrelic.com'
@@ -153,7 +153,82 @@ describe('Dashboard view', () => {
     const toggleElement = dashboardElement.querySelector('.Toggle')
     toggleElement.click()
 
+    dashboardView.setLayoutToList()
+
     expect(dashboardElement).toMatchSnapshot()
+  })
+
+  it('has the propper structure after toggling the layout to grid', () => {
+    const dashboardView = new DashboardView()
+    const dashboard = new Dashboard({
+      user: 'some.user@newrelic.com'
+    })
+
+    const dashboardElement = dashboardView.create(dashboard)
+
+    const toggleElement = dashboardElement.querySelector('.Toggle')
+    toggleElement.click()
+
+    dashboardView.setLayoutToList()
+    dashboardView.setLayoutToGrid()
+
+    expect(dashboardElement).toMatchSnapshot()
+  })
+
+  it('triggers an event when clicking on the layout toggle', () => {
+    const handler = jest.fn()
+
+    const dashboardView = new DashboardView()
+    const dashboard = new Dashboard({
+      user: 'some.user@newrelic.com'
+    })
+
+    dashboardView.onToggleLayout(handler)
+
+    const dashboardElement = dashboardView.create(dashboard)
+
+    const toggleElement = dashboardElement.querySelector('.Toggle')
+    toggleElement.click()
+    toggleElement.click()
+
+    expect(handler.mock.calls.length).toBe(2)
+    expect(handler.mock.calls[0][0]).toStrictEqual({ isActive: true })
+    expect(handler.mock.calls[1][0]).toStrictEqual({ isActive: false })
+  })
+
+  it('triggers an event when clicking on an app', () => {
+    const handler = jest.fn()
+
+    const dashboardView = new DashboardView()
+    const dashboard = new Dashboard({
+      user: 'some.user@newrelic.com'
+    })
+
+    const host = new Host({
+      id: 'a2f3d.host.com'
+    })
+
+    const app = new Application({
+      name: 'A',
+      version: 2,
+      apdex: 55,
+      contributors: [
+        'John Doe'
+      ]
+    })
+
+    host.addApp(app)
+    dashboard.addHost(host)
+
+    dashboardView.onClickApp(handler)
+
+    const dashboardElement = dashboardView.create(dashboard)
+
+    const appElement = dashboardElement.querySelector('.Host__App')
+    appElement.click()
+
+    expect(handler.mock.calls.length).toBe(1)
+    expect(handler.mock.calls[0][0]).toStrictEqual({ appId: app.id })
   })
 })
 
