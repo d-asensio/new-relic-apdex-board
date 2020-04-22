@@ -8,6 +8,10 @@ export class Host {
     this._insertAppInPosition(app)
   }
 
+  removeApp (appId) {
+    this._removeAppFromPosition(appId)
+  }
+
   getTopApps (nTopApps) {
     return this._apps.slice(0, nTopApps)
   }
@@ -20,6 +24,14 @@ export class Host {
 
       this._insertAppAtIndex(app, appInsertionIndex)
     }
+  }
+
+  _removeAppFromPosition (appId) {
+    const appIndex = this._findAppIndexById(appId)
+
+    this._indexExistOrThrow(appIndex)
+
+    this._removeAppAtIndex(appIndex)
   }
 
   _isSmallestApp (app) {
@@ -47,7 +59,31 @@ export class Host {
     return nextAppIndex - 1
   }
 
+  _findAppIndexById (appId) {
+    const appIndex = this._apps.findIndex(
+      comparee => comparee.id === appId
+    )
+
+    return appIndex
+  }
+
   _insertAppAtIndex (app, insertionIndex) {
     this._apps.splice(insertionIndex, 0, app)
+  }
+
+  _removeAppAtIndex (deletionIndex) {
+    this._apps.splice(deletionIndex, 1)
+  }
+
+  _indexExistOrThrow (index) {
+    if (!this._indexExists(index)) {
+      throw new Error(
+        'The specified app do not exist in the host.'
+      )
+    }
+  }
+
+  _indexExists (index) {
+    return index >= 0 && index < this._apps.length
   }
 }

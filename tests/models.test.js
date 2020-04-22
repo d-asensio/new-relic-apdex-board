@@ -491,4 +491,120 @@ describe('Host model', () => {
 
     expect(topApps).toStrictEqual([appB, appA])
   })
+
+  it('removes a single app', () => {
+    const host = new Host({
+      id: 'a2f3d.host.com'
+    })
+
+    const appA = new Application({
+      name: 'A',
+      version: 2,
+      apdex: 70,
+      contributors: [
+        'John Doe'
+      ],
+      host: [
+        'a2f3d.host.com'
+      ]
+    })
+
+    const appB = new Application({
+      name: 'B',
+      version: 2,
+      apdex: 30,
+      contributors: [
+        'John Doe'
+      ],
+      host: [
+        'a2f3d.host.com'
+      ]
+    })
+
+    const appC = new Application({
+      name: 'C',
+      version: 2,
+      apdex: 19,
+      contributors: [
+        'John Doe'
+      ],
+      host: [
+        'a2f3d.host.com'
+      ]
+    })
+
+    host.addApp(appC)
+    host.addApp(appA)
+    host.addApp(appB)
+
+    host.removeApp(appB.id)
+
+    const topApps = host.getTopApps(10)
+
+    expect(topApps).toStrictEqual([appA, appC])
+  })
+
+  it('removes all the apps', () => {
+    const host = new Host({
+      id: 'a2f3d.host.com'
+    })
+
+    const appA = new Application({
+      name: 'A',
+      version: 2,
+      apdex: 70,
+      contributors: [
+        'John Doe'
+      ],
+      host: [
+        'a2f3d.host.com'
+      ]
+    })
+
+    const appB = new Application({
+      name: 'B',
+      version: 2,
+      apdex: 30,
+      contributors: [
+        'John Doe'
+      ],
+      host: [
+        'a2f3d.host.com'
+      ]
+    })
+
+    const appC = new Application({
+      name: 'C',
+      version: 2,
+      apdex: 19,
+      contributors: [
+        'John Doe'
+      ],
+      host: [
+        'a2f3d.host.com'
+      ]
+    })
+
+    host.addApp(appC)
+    host.addApp(appA)
+    host.addApp(appB)
+
+    host.removeApp(appA.id)
+    host.removeApp(appC.id)
+    host.removeApp(appB.id)
+
+    const topApps = host.getTopApps(10)
+
+    expect(topApps).toStrictEqual([])
+  })
+
+  it('throws an error when attempting to remove a unexisting app', () => {
+    const host = new Host({
+      id: 'a2f3d.host.com'
+    })
+
+    expect(() => {
+      host.removeApp('app_10')
+    }).toThrowErrorMatchingSnapshot()
+  })
 })
