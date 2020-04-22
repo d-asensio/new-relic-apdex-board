@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard controller alerts when clicking an app 1`] = `"Release number: 7"`;
+
+exports[`Dashboard controller throws an error when attempting to render before initializing 1`] = `"The controller is not yet initialized. You should call to the \\"init ()\\" asynchronous method and await for itto finis before proceeding."`;
+
+exports[`Dashboard controller throws an error when attempting to render to a invalid dom node 1`] = `"The provided element is not valid."`;
