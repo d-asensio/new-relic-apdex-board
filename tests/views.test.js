@@ -40,6 +40,59 @@ describe('Host view', () => {
 
     expect(hostElement).toMatchSnapshot()
   })
+
+  it('trigger an event when clicking on an app', () => {
+    const handler = jest.fn()
+    const hostView = new HostView()
+    const host = new Host({
+      id: 'a2f3d.host.com'
+    })
+
+    const app = new Application({
+      name: 'A',
+      version: 2,
+      apdex: 55,
+      contributors: [
+        'John Doe'
+      ]
+    })
+
+    host.addApp(app)
+
+    hostView.onClickApp(handler)
+    const hostElement = hostView.create(host)
+
+    const appElement = hostElement.querySelector('.Host__App')
+    appElement.click()
+
+    expect(handler.mock.calls.length).toBe(1)
+    expect(handler.mock.calls[0][0]).toStrictEqual({ appId: app.id })
+  })
+
+  it('do not trigger an event when clicking on the host wrapper', () => {
+    const handler = jest.fn()
+    const hostView = new HostView()
+    const host = new Host({
+      id: 'a2f3d.host.com'
+    })
+
+    const app = new Application({
+      name: 'A',
+      version: 2,
+      apdex: 55,
+      contributors: [
+        'John Doe'
+      ]
+    })
+
+    host.addApp(app)
+
+    hostView.onClickApp(handler)
+    const hostElement = hostView.create(host)
+    hostElement.click()
+
+    expect(handler.mock.calls.length).toBe(0)
+  })
 })
 
 describe('Dashboard view', () => {

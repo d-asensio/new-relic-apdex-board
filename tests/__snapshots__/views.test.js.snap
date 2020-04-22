@@ -98,6 +98,7 @@ exports[`Dashboard view has the proper structure 1`] = `
       >
         <div
           class="Host__App"
+          data-app-id="app_3"
         >
           <div
             class="Host__AppApex"
@@ -130,6 +131,7 @@ exports[`Host view has the proper structure 1`] = `
   >
     <div
       class="Host__App"
+      data-app-id="app_0"
     >
       <div
         class="Host__AppApex"
