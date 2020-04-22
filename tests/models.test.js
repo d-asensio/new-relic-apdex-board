@@ -27,6 +27,141 @@ describe('Application model', () => {
     expect(app.id).toBeDefined()
   })
 
+  it('the id is not modificable', () => {
+    const app = new Application({
+      name: 'A',
+      version: 2,
+      apdex: 55,
+      contributors: [
+        'John Doe'
+      ]
+    })
+
+    expect(() => {
+      app.id = 'new_id'
+    }).toThrowError()
+  })
+
+  it('has name', () => {
+    const name = 'A'
+
+    const app = new Application({
+      name,
+      version: 2,
+      apdex: 55,
+      contributors: [
+        'John Doe'
+      ]
+    })
+
+    expect(app.name).toBe(name)
+  })
+
+  it('the name is not modificable', () => {
+    const app = new Application({
+      name: 'A',
+      version: 2,
+      apdex: 55,
+      contributors: [
+        'John Doe'
+      ]
+    })
+
+    expect(() => {
+      app.name = 'new_name'
+    }).toThrowError()
+  })
+
+  it('has version', () => {
+    const version = 2
+
+    const app = new Application({
+      name: 'A',
+      version,
+      apdex: 55,
+      contributors: [
+        'John Doe'
+      ]
+    })
+
+    expect(app.version).toBe(version)
+  })
+
+  it('the version is not modificable', () => {
+    const app = new Application({
+      name: 'A',
+      version: 2,
+      apdex: 55,
+      contributors: [
+        'John Doe'
+      ]
+    })
+
+    expect(() => {
+      app.version = 5
+    }).toThrowError()
+  })
+
+  it('has apdex', () => {
+    const apdex = 55
+
+    const app = new Application({
+      name: 'A',
+      version: 2,
+      apdex,
+      contributors: [
+        'John Doe'
+      ]
+    })
+
+    expect(app.apdex).toBe(apdex)
+  })
+
+  it('the apdex is not modificable', () => {
+    const app = new Application({
+      name: 'A',
+      version: 2,
+      apdex: 55,
+      contributors: [
+        'John Doe'
+      ]
+    })
+
+    expect(() => {
+      app.apdex = 58
+    }).toThrowError()
+  })
+
+  it('has contributors', () => {
+    const contributors = [
+      'John Doe'
+    ]
+
+    const app = new Application({
+      name: 'A',
+      version: 2,
+      apdex: 55,
+      contributors
+    })
+
+    expect(app.contributors).toBe(contributors)
+  })
+
+  it('contributors are not modificable', () => {
+    const app = new Application({
+      name: 'A',
+      version: 2,
+      apdex: 55,
+      contributors: [
+        'John Doe'
+      ]
+    })
+
+    expect(() => {
+      app.contributors = []
+    }).toThrowError()
+  })
+
   it('can be compared to another app', () => {
     const appA = new Application({
       name: 'A',
@@ -75,6 +210,26 @@ describe('Dashboard model', () => {
     })
 
     expect(dashboard).toBeInstanceOf(Dashboard)
+  })
+
+  it('has user', () => {
+    const user = 'some.one@newrelic.com'
+
+    const dashboard = new Dashboard({
+      user
+    })
+
+    expect(dashboard.user).toBe(user)
+  })
+
+  it('the user is not modificable', () => {
+    const dashboard = new Dashboard({
+      user: 'some.one@newrelic.com'
+    })
+
+    expect(() => {
+      dashboard.user = 'some.other@newrelic.com'
+    }).toThrowError()
   })
 
   it('adds an app', () => {

@@ -1,10 +1,12 @@
 export class Dashboard {
   constructor ({ user }) {
-    this.user = user
+    this._user = user
 
     this._hosts = new Map()
     this._apps = new Map()
   }
+
+  get user () { return this._user }
 
   addApp (app) {
     this._apps.set(app.id, app)
