@@ -646,8 +646,6 @@ describe('Host model', () => {
 
     const remainingApps = host.getTopApps(remainingNApps)
 
-    console.log(remainingApps)
-
     const unmatchingApp = remainingApps.find(
       remainingApp => !appsMap.has(remainingApp.id)
     )
