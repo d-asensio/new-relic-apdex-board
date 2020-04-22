@@ -6,7 +6,7 @@ import { Dashboard } from '../src/models'
 
 enableFetchMocks()
 
-const largeResponseMock = JSON.stringify(mockData)
+const largeResponseMock = JSON.stringify(mockData.slice(0, 100))
 const smallResponseMock = JSON.stringify(mockData.slice(0, 2))
 
 describe('Dashboard service', () => {
