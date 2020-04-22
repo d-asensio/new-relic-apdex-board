@@ -1,0 +1,53 @@
+
+.Host {
+  background: #FFF;
+  padding: 30px;
+
+  &__Title {
+    font-size: 16px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+
+    color: #000;
+
+    margin-bottom: 23px;
+  }
+
+  &__App {
+    display: flex;
+
+    user-select: none;
+    cursor: pointer;
+
+    margin-bottom: 23px;
+
+    &:last-child {
+      margin-bottom: initial;
+    }
+
+    > * {
+      pointer-events: none;
+    }
+  }
+
+  &__AppApex {
+    font-size: 13px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+
+    color: #4A4A4A;
+
+    margin-right: 23px;
+  }
+
+  &__AppName {
+    font-size: 16px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    line-height: 1.2;
+
+    color: #4A4A4A;
+  }
+}

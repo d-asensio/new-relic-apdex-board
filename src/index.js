@@ -1,4 +1,3 @@
-
 import './styles/index.scss'
 
 import { DashboardController } from './controllers'

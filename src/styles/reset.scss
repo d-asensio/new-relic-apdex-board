@@ -1,0 +1,14 @@
+@import "~normalize.css";
+
+* {
+  box-sizing: border-box;
+
+  &::after,
+  &::before {
+    box-sizing: border-box;
+  }
+}
+
+:root {
+  font-size: 16px;
+}
