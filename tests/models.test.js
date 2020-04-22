@@ -611,6 +611,50 @@ describe('Host model', () => {
     expect(topApps).toStrictEqual([])
   })
 
+  it('keeps apps insetion an deletion postions consistent', () => {
+    const appsMap = new Map()
+    const host = new Host({
+      id: 'a2f3d.host.com'
+    })
+
+    const addNApps = 1000
+    const removeNApps = 980
+    const remainingNApps = Math.abs(addNApps - removeNApps)
+
+    for (let i = 0; i < addNApps; i++) {
+      const randomApex = Math.floor(Math.random() * 99) + 1
+
+      const app = new Application({
+        name: 'A',
+        version: 2,
+        apdex: randomApex,
+        contributors: [
+          'John Doe'
+        ]
+      })
+
+      appsMap.set(app.id, app)
+      host.addApp(app)
+    }
+
+    const removeApps = host.getTopApps(removeNApps)
+
+    for (const app of removeApps) {
+      appsMap.delete(app.id)
+      host.removeApp(app)
+    }
+
+    const remainingApps = host.getTopApps(remainingNApps)
+
+    console.log(remainingApps)
+
+    const unmatchingApp = remainingApps.find(
+      remainingApp => !appsMap.has(remainingApp.id)
+    )
+
+    expect(unmatchingApp).not.toBeDefined()
+  })
+
   it('throws an error when attempting to remove a unexisting app', () => {
     const host = new Host({
       id: 'a2f3d.host.com'

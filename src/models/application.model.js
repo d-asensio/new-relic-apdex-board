@@ -17,7 +17,20 @@ export class Application {
   get contributors () { return this._contributors }
 
   compareTo (comparee) {
-    return this.apdex - comparee.apdex
+    const comparison = this.apdex - comparee.apdex
+
+    if (comparison === 0) {
+      return this._comparisonTiebreakerByIdentifier(comparee)
+    }
+
+    return comparison
+  }
+
+  _comparisonTiebreakerByIdentifier (comparee) {
+    if (this.id > comparee.id) return 1
+    if (this.id < comparee.id) return -1
+
+    return 0
   }
 
   static byApdexInDescOrder (appA, appB) {
