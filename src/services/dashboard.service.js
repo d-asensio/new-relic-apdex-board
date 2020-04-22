@@ -26,7 +26,7 @@ export class DashboardService {
   }
 
   getTopAppsByHost (hostId) {
-    this._hostExistsOrThrow(hostId)
+    this._hostIdExistsOrThrow(hostId)
 
     const host = this._getHostById(hostId)
 
@@ -34,7 +34,7 @@ export class DashboardService {
   }
 
   getAppById (appId) {
-    return this._dashboard.getApp(appId)
+    return this._dashboard.getAppById(appId)
   }
 
   async _fetchAppRecordsFromApi () {
@@ -56,8 +56,8 @@ export class DashboardService {
   }
 
   _getOrCreateHostById (hostId) {
-    if (!this._hostExists(hostId)) {
-      return this._createHost(hostId)
+    if (!this._hostIdExists(hostId)) {
+      return this._createHostById(hostId)
     }
 
     const host = this._getHostById(hostId)
@@ -66,10 +66,10 @@ export class DashboardService {
   }
 
   _getHostById (hostId) {
-    return this._dashboard.getHost(hostId)
+    return this._dashboard.getHostById(hostId)
   }
 
-  _createHost (hostId) {
+  _createHostById (hostId) {
     const host = new Host({ id: hostId })
 
     this._dashboard.addHost(host)
@@ -77,15 +77,15 @@ export class DashboardService {
     return host
   }
 
-  _hostExistsOrThrow (hostId) {
-    if (!this._hostExists(hostId)) {
+  _hostIdExistsOrThrow (hostId) {
+    if (!this._hostIdExists(hostId)) {
       throw new Error(
         `The host identified by "${hostId} do not exist."`
       )
     }
   }
 
-  _hostExists (hostId) {
-    return this._dashboard.hasHost(hostId)
+  _hostIdExists (hostId) {
+    return this._dashboard.hasHostId(hostId)
   }
 }

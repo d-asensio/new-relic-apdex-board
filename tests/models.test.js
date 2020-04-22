@@ -246,7 +246,7 @@ describe('Dashboard model', () => {
 
     dashboard.addApp(app)
 
-    const hasApp = dashboard.hasApp(app.id)
+    const hasApp = dashboard.hasAppId(app.id)
 
     expect(hasApp).toBe(true)
   })
@@ -265,7 +265,7 @@ describe('Dashboard model', () => {
 
     dashboard.addApp(app)
 
-    const gotApp = dashboard.getApp(app.id)
+    const gotApp = dashboard.getAppById(app.id)
 
     expect(app).toBe(gotApp)
   })
@@ -298,7 +298,7 @@ describe('Dashboard model', () => {
 
     dashboard.addHost(host)
 
-    const hasHost = dashboard.hasHost(host.id)
+    const hasHost = dashboard.hasHostId(host.id)
 
     expect(hasHost).toBe(true)
   })
@@ -314,7 +314,7 @@ describe('Dashboard model', () => {
 
     dashboard.addHost(host)
 
-    const gotHost = dashboard.getHost(host.id)
+    const gotHost = dashboard.getHostById(host.id)
 
     expect(gotHost).toBe(host)
   })

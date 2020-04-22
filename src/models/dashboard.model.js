@@ -12,11 +12,11 @@ export class Dashboard {
     this._apps.set(app.id, app)
   }
 
-  hasApp (appId) {
+  hasAppId (appId) {
     return this._apps.has(appId)
   }
 
-  getApp (appId) {
+  getAppById (appId) {
     return this._apps.get(appId)
   }
 
@@ -24,11 +24,11 @@ export class Dashboard {
     this._hosts.set(host.id, host)
   }
 
-  hasHost (hostId) {
+  hasHostId (hostId) {
     return this._hosts.has(hostId)
   }
 
-  getHost (hostId) {
+  getHostById (hostId) {
     return this._hosts.get(hostId)
   }
 
