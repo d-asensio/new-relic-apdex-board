@@ -2,6 +2,7 @@ import { enableFetchMocks } from 'jest-fetch-mock'
 import mockData from '../data/host-app-data.json'
 
 import { DashboardService } from '../src/services'
+import { Dashboard } from '../src/models'
 
 enableFetchMocks()
 
@@ -68,5 +69,21 @@ describe('Dashboard service', () => {
     const gotApp = dashboardService.getAppById(appA.id)
 
     expect(gotApp).toBe(appA)
+  })
+
+  it('has dashboard instance', () => {
+    const dashboardService = new DashboardService()
+
+    expect(dashboardService.dashboard).toBeInstanceOf(Dashboard)
+  })
+
+  it('the dashboard instance is not modificable', () => {
+    const dashboardService = new DashboardService()
+
+    expect(() => {
+      dashboardService.dashboard = new Dashboard({
+        user: 'some.user@newrelic.com'
+      })
+    }).toThrowError()
   })
 })

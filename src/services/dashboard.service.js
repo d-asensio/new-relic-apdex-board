@@ -9,6 +9,8 @@ export class DashboardService {
     })
   }
 
+  get dashboard () { return this._dashboard }
+
   async init () {
     const appRecords = await this._fetchAppRecordsFromApi()
 
