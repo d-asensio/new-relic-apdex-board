@@ -2,12 +2,12 @@ import { enableFetchMocks } from 'jest-fetch-mock'
 import mockData from '../data/host-app-data.json'
 
 import { DashboardService } from '../src/services'
-import { Dashboard } from '../src/models'
+import { Dashboard, Application } from '../src/models'
 
 enableFetchMocks()
 
 const largeResponseMock = JSON.stringify(mockData.slice(0, 100))
-const smallResponseMock = JSON.stringify(mockData.slice(0, 2))
+const smallResponseMock = JSON.stringify(mockData.slice(0, 10))
 
 describe('Dashboard service', () => {
   beforeEach(() => {
@@ -85,5 +85,134 @@ describe('Dashboard service', () => {
         user: 'some.user@newrelic.com'
       })
     }).toThrowError()
+  })
+
+  it('adds an app to a new host', async () => {
+    fetch.mockResponseOnce(JSON.stringify([
+      {
+        name: 'A',
+        contributors: [],
+        version: 7,
+        apdex: 68,
+        host: [
+          'first.host.com'
+        ]
+      },
+      {
+        name: 'B',
+        contributors: [],
+        version: 7,
+        apdex: 30,
+        host: [
+          'first.host.com'
+        ]
+      }
+    ]))
+
+    const dashboardService = new DashboardService()
+    await dashboardService.init()
+
+    const [appA] = dashboardService.getTopAppsByHost('first.host.com')
+
+    dashboardService.addAppToHosts(appA, [
+      'second.host.com'
+    ])
+
+    const [appASecond] = dashboardService.getTopAppsByHost('second.host.com')
+
+    expect(appASecond).toBe(appA)
+  })
+
+  it('removes an app from a host', async () => {
+    fetch.mockResponseOnce(JSON.stringify([
+      {
+        name: 'A',
+        contributors: [],
+        version: 7,
+        apdex: 68,
+        host: [
+          'first.host.com'
+        ]
+      },
+      {
+        name: 'B',
+        contributors: [],
+        version: 7,
+        apdex: 30,
+        host: [
+          'first.host.com'
+        ]
+      }
+    ]))
+
+    const dashboardService = new DashboardService()
+    await dashboardService.init()
+
+    const [appA, appB] = dashboardService.getTopAppsByHost('first.host.com')
+
+    dashboardService.removeAppFromHosts(appA, [
+      'first.host.com'
+    ])
+
+    const [appBFirst] = dashboardService.getTopAppsByHost('first.host.com')
+
+    expect(appBFirst).toBe(appB)
+  })
+
+  it('attempts to add an app that do not exist', async () => {
+    fetch.mockResponseOnce('[]')
+
+    const dashboardService = new DashboardService()
+    await dashboardService.init()
+
+    const unexistingApp = new Application({
+      name: 'A',
+      apdex: 33,
+      version: 7,
+      contributors: []
+    })
+
+    expect(() => {
+      dashboardService.addAppFromHosts(unexistingApp, [
+        'first.host.com'
+      ])
+    }).toThrowErrorMatchingSnapshot()
+  })
+
+  it('attempts to remove an app that do not exist', async () => {
+    fetch.mockResponseOnce('[]')
+
+    const dashboardService = new DashboardService()
+    await dashboardService.init()
+
+    const unexistingApp = new Application({
+      name: 'A',
+      apdex: 33,
+      version: 7,
+      contributors: []
+    })
+
+    expect(() => {
+      dashboardService.removeAppFromHosts(unexistingApp, [
+        'first.host.com'
+      ])
+    }).toThrowErrorMatchingSnapshot()
+  })
+
+  it('continues returning 25 top apps after removing', async () => {
+    fetch.mockResponseOnce(largeResponseMock)
+
+    const dashboardService = new DashboardService()
+    await dashboardService.init()
+
+    const [highestApexApp] = dashboardService.getTopAppsByHost('7e6272f7-098e.dakota.biz')
+
+    dashboardService.removeAppFromHosts(highestApexApp, [
+      '7e6272f7-098e.dakota.biz'
+    ])
+
+    const topApps = dashboardService.getTopAppsByHost('7e6272f7-098e.dakota.biz')
+
+    expect(topApps.length).toEqual(25)
   })
 })

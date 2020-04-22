@@ -19,9 +19,22 @@ export class DashboardService {
   }
 
   addAppToHosts (app, hosts) {
+    this._appExistsOrThrow(app)
+
     for (const hostId of hosts) {
       const host = this._getOrCreateHostById(hostId)
       host.addApp(app)
+    }
+  }
+
+  removeAppFromHosts (app, hosts) {
+    this._appExistsOrThrow(app)
+
+    for (const hostId of hosts) {
+      this._hostIdExistsOrThrow(hostId)
+
+      const host = this._getHostById(hostId)
+      host.removeApp(app)
     }
   }
 
@@ -50,8 +63,8 @@ export class DashboardService {
     for (const { host, ...appData } of appRecords) {
       const app = new Application(appData)
 
-      this.addAppToHosts(app, host)
       this._dashboard.addApp(app)
+      this.addAppToHosts(app, host)
     }
   }
 
@@ -85,7 +98,19 @@ export class DashboardService {
     }
   }
 
+  _appExistsOrThrow (app) {
+    if (!this._appExists(app)) {
+      throw new Error(
+        `The app ${app.name} do not exist in the dashboard.`
+      )
+    }
+  }
+
   _hostIdExists (hostId) {
     return this._dashboard.hasHostId(hostId)
+  }
+
+  _appExists (app) {
+    return this._dashboard.hasAppId(app.id)
   }
 }
