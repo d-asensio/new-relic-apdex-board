@@ -1,3 +1,5 @@
+$dashboard-color--title:   $color--text-strong !default;
+$dashboard-color--caption: $color--text-strong !default;
 
 .Dashboard {
   &__Header {
@@ -23,7 +25,7 @@
     font-weight: 700;
     line-height: 1.2;
     
-    color: #000;
+    color: $dashboard-color--title;
 
     @include sp-inline($space--small);
   }
@@ -34,7 +36,7 @@
     font-weight: 400;
     line-height: 1.2;
     
-    color: #000;
+    color: $dashboard-color--caption;
 
     flex: 1;
   

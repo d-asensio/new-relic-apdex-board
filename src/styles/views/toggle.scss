@@ -1,3 +1,7 @@
+$toggle-color--background:  $color--shade-n100 !default;
+$toggle-color--border:      $color--shade-n70 !default;
+$toggle-color--active-mark: $color--state-active !default;
+
 .Toggle {
   font-size: 16px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -21,10 +25,10 @@
     width: 18px;
     height: 18px;
 
-    background: #FFF;
+    background: $toggle-color--background;
 
     border-radius: 5px;
-    border: 1px solid #E5E5E5;
+    border: 1px solid $toggle-color--border;
 
     @include sp-inline($space--small);
   
@@ -32,10 +36,10 @@
       width: 10px;
       height: 10px;
   
-      background: #83d22a;
+      background: $toggle-color--active-mark;
   
       border-radius: 3px;
-      border: 1px solid #E5E5E5;
+      border: 1px solid $toggle-color--border;
     }
   }
 
