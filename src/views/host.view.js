@@ -13,7 +13,7 @@ export class HostView {
   create (host) {
     this._rootElement = (
       <div className='Host'>
-        <div className='Host__Title'>{host.id}</div>
+        <div className='Host__Title' aria-label='host url'>{host.id}</div>
         <div className='Host__AppList'>
           {this._createAppElements(
             host.getTopApps(25)
@@ -34,8 +34,8 @@ export class HostView {
   _createAppElements (apps) {
     return apps.map(app => (
       <div className='Host__App' data-app-id={app.id}>
-        <div className='Host__AppApex'>{app.apdex}</div>
-        <div className='Host__AppName'>{app.name}</div>
+        <div className='Host__AppApex' aria-label='apex score'>{app.apdex}</div>
+        <div className='Host__AppName' aria-label='application name'>{app.name}</div>
       </div>
     ))
   }

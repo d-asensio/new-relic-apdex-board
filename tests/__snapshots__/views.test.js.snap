@@ -1,20 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Dashboard view has the proper structure 1`] = `
-<div
+<main
   class="Dashboard"
 >
-  <div
+  <header
     class="Dashboard__Header"
   >
     <div
       class="Dashboard__HeaderInfo"
     >
-      <div
+      <h1
         class="Dashboard__Title"
       >
         Apps by Host
-      </div>
+      </h1>
       <div
         class="Dashboard__Caption"
       >
@@ -37,7 +37,7 @@ exports[`Dashboard view has the proper structure 1`] = `
         Show as list
       </label>
     </div>
-  </div>
+  </header>
   <div
     class="Dashboard__Content"
   >
@@ -45,6 +45,7 @@ exports[`Dashboard view has the proper structure 1`] = `
       class="Host"
     >
       <div
+        aria-label="host url"
         class="Host__Title"
       >
         a2f3d.host.com
@@ -57,11 +58,13 @@ exports[`Dashboard view has the proper structure 1`] = `
           data-app-id="app_3"
         >
           <div
+            aria-label="apex score"
             class="Host__AppApex"
           >
             55
           </div>
           <div
+            aria-label="application name"
             class="Host__AppName"
           >
             A
@@ -70,24 +73,24 @@ exports[`Dashboard view has the proper structure 1`] = `
       </div>
     </div>
   </div>
-</div>
+</main>
 `;
 
 exports[`Dashboard view has the propper structure after toggling the layout to grid 1`] = `
-<div
+<main
   class="Dashboard"
 >
-  <div
+  <header
     class="Dashboard__Header"
   >
     <div
       class="Dashboard__HeaderInfo"
     >
-      <div
+      <h1
         class="Dashboard__Title"
       >
         Apps by Host
-      </div>
+      </h1>
       <div
         class="Dashboard__Caption"
       >
@@ -110,28 +113,28 @@ exports[`Dashboard view has the propper structure after toggling the layout to g
         Show as list
       </label>
     </div>
-  </div>
+  </header>
   <div
     class="Dashboard__Content"
   />
-</div>
+</main>
 `;
 
 exports[`Dashboard view has the propper structure after toggling the layout to list 1`] = `
-<div
+<main
   class="Dashboard Dashboard--listLayout"
 >
-  <div
+  <header
     class="Dashboard__Header"
   >
     <div
       class="Dashboard__HeaderInfo"
     >
-      <div
+      <h1
         class="Dashboard__Title"
       >
         Apps by Host
-      </div>
+      </h1>
       <div
         class="Dashboard__Caption"
       >
@@ -154,11 +157,11 @@ exports[`Dashboard view has the propper structure after toggling the layout to l
         Show as an awesome grid
       </label>
     </div>
-  </div>
+  </header>
   <div
     class="Dashboard__Content"
   />
-</div>
+</main>
 `;
 
 exports[`Host view has the proper structure 1`] = `
@@ -166,6 +169,7 @@ exports[`Host view has the proper structure 1`] = `
   class="Host"
 >
   <div
+    aria-label="host url"
     class="Host__Title"
   >
     a2f3d.host.com
@@ -178,11 +182,13 @@ exports[`Host view has the proper structure 1`] = `
       data-app-id="app_0"
     >
       <div
+        aria-label="apex score"
         class="Host__AppApex"
       >
         55
       </div>
       <div
+        aria-label="application name"
         class="Host__AppName"
       >
         A
@@ -207,20 +213,20 @@ exports[`Toggle view has the proper structure 1`] = `
 `;
 
 exports[`changes the toggle text back when the user clicks it twice 1`] = `
-<div
+<main
   class="Dashboard"
 >
-  <div
+  <header
     class="Dashboard__Header"
   >
     <div
       class="Dashboard__HeaderInfo"
     >
-      <div
+      <h1
         class="Dashboard__Title"
       >
         Apps by Host
-      </div>
+      </h1>
       <div
         class="Dashboard__Caption"
       >
@@ -243,9 +249,9 @@ exports[`changes the toggle text back when the user clicks it twice 1`] = `
         Show as list
       </label>
     </div>
-  </div>
+  </header>
   <div
     class="Dashboard__Content"
   />
-</div>
+</main>
 `;

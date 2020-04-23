@@ -23,10 +23,10 @@ export class DashboardView {
 
   create (dashboard) {
     this._rootElement = (
-      <div className='Dashboard'>
-        <div className='Dashboard__Header'>
+      <main className='Dashboard'>
+        <header className='Dashboard__Header'>
           <div className='Dashboard__HeaderInfo'>
-            <div className='Dashboard__Title'>Apps by Host</div>
+            <h1 className='Dashboard__Title'>Apps by Host</h1>
             <div className='Dashboard__Caption'>
               for user {dashboard.user}
             </div>
@@ -34,11 +34,11 @@ export class DashboardView {
           <div className='Dashboard__HeaderControls'>
             {this._createToggleElement()}
           </div>
-        </div>
+        </header>
         <div className='Dashboard__Content'>
           {this._createHostElements(dashboard.getAllHosts())}
         </div>
-      </div>
+      </main>
     )
 
     this.setLayoutToGrid()
