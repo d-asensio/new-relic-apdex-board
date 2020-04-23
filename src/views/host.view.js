@@ -3,6 +3,8 @@ import jsx from '../jsx-runtime'
 
 import { EventBus } from '../utils'
 
+const NUMBER_OF_TOP_APPS_PER_HOST = 5
+
 /**
  * View for the host container.
  */
@@ -19,7 +21,7 @@ export class HostView {
         <div className='Host__Title' aria-label='host url'>{host.id}</div>
         <div className='Host__AppList'>
           {this._createAppElements(
-            host.getTopApps(25)
+            host.getTopApps(NUMBER_OF_TOP_APPS_PER_HOST)
           )}
         </div>
       </div>

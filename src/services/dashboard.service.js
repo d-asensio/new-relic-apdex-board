@@ -2,6 +2,8 @@ import { Dashboard, Application, Host } from '../models'
 
 const API_URL = 'data/host-app-data.json'
 
+const NUMBER_OF_TOP_APPS = 25
+
 /**
  * Manages the data of the dashboard, meaning that it kwows how to create models and how to get data to create them.
  */
@@ -46,7 +48,7 @@ export class DashboardService {
 
     const host = this._getHostById(hostId)
 
-    return host.getTopApps(25)
+    return host.getTopApps(NUMBER_OF_TOP_APPS)
   }
 
   getAppById (appId) {
