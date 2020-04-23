@@ -40,11 +40,17 @@ function _attributeSupportedByElementOrThrow (attributeName, element) {
 
 function _isAttributeSupportedByElement (attributeName, element) {
   if (_isDataAttribute(attributeName)) return true
+  if (_isAriaAttribute(attributeName)) return true
+
   return attributeName in element
 }
 
 function _isDataAttribute (attributeName) {
   return attributeName.startsWith('data-')
+}
+
+function _isAriaAttribute (attributeName) {
+  return attributeName.startsWith('aria-')
 }
 
 function _addClassNameToElement (className, element) {

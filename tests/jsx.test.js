@@ -87,8 +87,13 @@ describe('JSX Rumtime', () => {
   })
 
   it('creates an element with a data attribute', () => {
-    const inputElement = (<div data-info='whatever' />)
-    expect(inputElement.dataset.info).toBe('whatever')
+    const divElement = (<div data-info='whatever' />)
+    expect(divElement.dataset.info).toBe('whatever')
+  })
+
+  it('creates an element with an aria attribute', () => {
+    const divElement = (<div aria-label='read this a11y string' />)
+    expect(divElement.getAttribute('aria-label')).toBe('read this a11y string')
   })
 
   it('throws an error while attempting to create an element with a unsupported attribute', () => {
