@@ -1,3 +1,6 @@
+/**
+ * Simple but powerful asynchronous event-bus implementation (a.k.a. event agregator).
+ */
 export class EventBus {
   constructor () {
     this._events = new Map()

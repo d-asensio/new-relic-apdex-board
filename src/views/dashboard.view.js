@@ -11,6 +11,10 @@ const LAYOUT_LIST_CLASSNAME = 'Dashboard--listLayout'
 const LAYOUT_GRID_TEXT = 'Show as list'
 const LAYOUT_LIST_TEXT = 'Show as an awesome grid'
 
+/**
+ * View for the dashboard container. Knows how to paint things from the model data, how to update things and handles
+ * user interactions.
+ */
 export class DashboardView {
   constructor () {
     this._eventBus = new EventBus()

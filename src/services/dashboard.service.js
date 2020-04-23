@@ -2,6 +2,9 @@ import { Dashboard, Application, Host } from '../models'
 
 const API_URL = 'data/host-app-data.json'
 
+/**
+ * Manages the data of the dashboard, meaning that it kwows how to create models and how to get data to create them.
+ */
 export class DashboardService {
   constructor () {
     this._dashboard = new Dashboard({

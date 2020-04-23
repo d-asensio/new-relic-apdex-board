@@ -3,6 +3,9 @@ import jsx from '../jsx-runtime'
 
 import { EventBus } from '../utils'
 
+/**
+ * View for the host container.
+ */
 export class HostView {
   constructor () {
     this._eventBus = new EventBus()

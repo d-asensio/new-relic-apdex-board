@@ -3,6 +3,9 @@ import jsx from '../jsx-runtime'
 
 import { EventBus } from '../utils'
 
+/**
+ * View for the toggle.
+ */
 export class ToggleView {
   constructor () {
     this._eventBus = new EventBus()

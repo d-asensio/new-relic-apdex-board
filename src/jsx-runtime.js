@@ -1,3 +1,6 @@
+/**
+ * Custom JSX runtime. It just creates and composes dom elements.
+ */
 export default function createElement (tag, props, ...children) {
   const element = document.createElement(tag)
 

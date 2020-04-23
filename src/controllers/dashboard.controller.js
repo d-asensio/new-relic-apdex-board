@@ -1,3 +1,7 @@
+
+/**
+ * Mediates between the user input, the data and the view.
+ */
 export class DashboardController {
   constructor (service, view) {
     this._isInitialized = false
