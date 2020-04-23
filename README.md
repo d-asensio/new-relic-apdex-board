@@ -146,7 +146,7 @@ Again `O(log n)` since it also uses the binary search. Same argumentation.
 ```
 > Find this method at: `src/models/host.model.js`
 
-What enables the use the same binary search function for both insertion and deletion of an app is the implementation of the `app.compareTo(app)` method:
+What enables using the same binary search function for both insertion and deletion of an app is the implementation of the `app.compareTo(app)` method:
 
 ```javascript
   compareTo (comparee) {
@@ -169,7 +169,7 @@ What enables the use the same binary search function for both insertion and dele
 
 As you might notice, it has a `_comparisonTiebreakerByIdentifier` that ensures a **unique sorting position** for each app, this avoids problems when the binary search algorithm is walking through apps with the same apex index.
 
-> Info: I rely on comparing the app id's for the tiebreaker because those ids are auto-generated strings and I can ensure that are unique and don't have any extraneous character that could cause unexpected behaviors, in that case, I would be forced to use `String.prototype.localeCompare()` that would affect the performance of the operation.
+> Info: I rely on comparing the app ids for the tiebreaker because those ids are auto-generated strings and I can ensure that are unique and don't have any extraneous character that could cause unexpected behaviors, in that case, I would be forced to use `String.prototype.localeCompare()` that would affect the performance of the operation.
 
 ## Tooling
 
