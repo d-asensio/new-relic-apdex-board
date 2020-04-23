@@ -1,12 +1,6 @@
-@import "reset";
-
+@import "reset/all";
 @import "tokens/all";
 @import "utilities/all";
 
+@import "common";
 @import "views/all";
-
-body {
-  background: $color--background;
-  
-  @include sp-inset($space--large);
-}
