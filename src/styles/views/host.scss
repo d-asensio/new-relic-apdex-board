@@ -3,22 +3,20 @@ $host-color--title:      $color--text-strong !default;
 $host-color--app-text:   $color--text-light !default;
 
 .Host {
-  background: $host-color--background;
-  
   @include sp-inset($space--large);
 
+  background: $host-color--background;
+
   &__Title {
-    font-size: 16px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: 700;
-    line-height: 1.2;
+    @include typography-title();
+    @include sp-stack($space--medium);
 
     color: $host-color--title;
-
-    @include sp-stack($space--medium);
   }
 
   &__App {
+    @include sp-stack($space--medium);
+
     display: flex;
 
     user-select: none;
@@ -28,29 +26,20 @@ $host-color--app-text:   $color--text-light !default;
       pointer-events: none;
     }
 
-    @include sp-stack($space--medium);
-
     &:last-child {
       @include sp-stack($space--none);
     }
   }
 
   &__AppApex {
-    font-size: 13px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: 700;
-    line-height: 1.2;
+    @include typography-discrete();
+    @include sp-inline($space--medium);
 
     color: $host-color--app-text;
-
-    @include sp-inline($space--medium);
   }
 
   &__AppName {
-    font-size: 16px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: 400;
-    line-height: 1.2;
+    @include typography-body();
 
     color: $host-color--app-text;
   }

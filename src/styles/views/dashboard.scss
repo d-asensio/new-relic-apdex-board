@@ -3,38 +3,31 @@ $dashboard-color--caption: $color--text-strong !default;
 
 .Dashboard {
   &__Header {
+    @include sp-stack($space--large);
+
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-
-    @include sp-stack($space--large);
   }
 
   &__HeaderInfo {
+    @include sp-inline($space--large);
+
     display: flex;
     align-items: baseline;
 
     min-width: 0;
-
-    @include sp-inline($space--large);
   }
 
   &__Title {
-    font-size: 35px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: 700;
-    line-height: 1.2;
+    @include typography-heading();
+    @include sp-inline($space--small);
     
     color: $dashboard-color--title;
-
-    @include sp-inline($space--small);
   }
 
   &__Caption {
-    font-size: 18px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: 400;
-    line-height: 1.2;
+    @include typography-caption();
     
     color: $dashboard-color--caption;
 
