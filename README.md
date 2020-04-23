@@ -86,7 +86,7 @@ Following the advice given at the code challenge, I read the JSON at once, and t
 ```
 > Find this method at: `src/services/dashboard.service.js`
 
-The complexity of this part is hard to determine since it depends on the implementation of the JavaScript engine that is running the code. In case of `V8` it uses the [`std::sort` C++ 11 function](https://github.com/v8/v8/blob/4b9b23521e6fd42373ebbcb20ebe03bf445494f9/src/runtime/runtime-typedarray.cc#L135) that is supposed to be `O(n log(n)`.
+The complexity of this part is hard to determine since it depends on the implementation of the JavaScript engine that is running the code. In case of `V8` it uses the [`std::sort` C++ 11 function](https://github.com/v8/v8/blob/4b9b23521e6fd42373ebbcb20ebe03bf445494f9/src/runtime/runtime-typedarray.cc#L135) that is supposed to be `O(n log n)`.
 
 ### Inserting the apps into each host in sorted order.
 
@@ -126,7 +126,7 @@ As you can see, it uses a binary search to perform the insertion:
 ```
 > Find this method at: `src/models/host.model.js`
 
-So it is discarding the half of the possibilities on each iteration of the `while` loop, so again `O(log n)`.
+So it is discarding the half of the possibilities on each iteration of the `while` loop, so `O(log n)`.
 
 A nice optimization is that as an effect of sorting the app records right before inserting them to the host, it happens that the real cost is `O(1)` at this point (for the insertion operation of each new app I mean) since the binary search do not iterate through any record being the smallest app already at the end of the `host._apps` array.
 
