@@ -103,7 +103,7 @@ After this, the records are inserted into the hosts via `host.addApp(app)`:
 As you can see, it uses a binary search to perform the insertion:
 
 ```javascript
-  _binarySearchIndex (app) {
+  _binarySearchAppIndex (app) {
     let startIndex = 0
     let endIndex = this._apps.length - 1
     let currentIndex
