@@ -166,6 +166,7 @@ What enables using the same binary search function for both insertion and deleti
     return 0
   }
 ```
+> Find this method at: src/models/application.model.js
 
 As you might notice, it has a `_comparisonTiebreakerByIdentifier` that ensures a **unique sorting position** for each app, this avoids problems when the binary search algorithm is walking through apps with the same apex index.
 
