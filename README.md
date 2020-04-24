@@ -36,13 +36,13 @@ I have put together the acceptance criteria that are defined in the code challen
 
 - [x] **Do not use frameworks/libraries:** I don't use any dependency apart from the tooling used to transpile, bundle and test the code, there is a list of the used tools at the [tooling section](#tooling).
 
-> You'll see that I do use JSX to render the views, but this is because I have written a custom jsx-runtime for the purpose. I use `@babel/plugin-transform-react-jsx` to transpile it, but with a custom `pragma` that delegates the processing to the runtime that I have created. You can find the runtime at `src/jsx-runtime.js`.
+> You'll see that I do use JSX to render the views, but this is because I have written a custom jsx-runtime for the purpose. I use `@babel/plugin-transform-react-jsx` to transpile it, but with a custom `pragma` that delegates the processing to the runtime that I have created. You can find the runtime implementation at `src/jsx-runtime.js`.
 
 - [x] **Maintainable and well-written code using good object-oriented practices:** I have tried so hard to do it. I followed the SOLID principles and some bits of advice I got from books (Clean Code, GOF Design patterns, and others). I hope you find the code enjoyable to read and easy to follow.
 
 - [x] **Specify Big-O notation of your algorithm:** Yes, there is a [section of this document](#algorithm-complexity) 
 
-- [x] **Not a database or any data source connection:** I didn't use any database or similar. It's true that I make a request to get the JSON data, but I don't use any API Service, just `copy-webpack-plugin` and `webpack-dev-server`, since I wanted to avoid bundling the data along with the code.
+- [x] **Not a database or any data source connection:** I didn't use any database or similar. I indeed make a request to get the JSON data, but I don't use any API Service, just `copy-webpack-plugin` and `webpack-dev-server`, since I wanted to avoid bundling the data along with the code.
 
 - [x] **Not using 3rd party libraries such as JS or CSS libraries:** No, as I mentioned before I don't use any library. It is fair to mention that I started by using `normalize.css`, but I finally hand-picked the relevant rules to the project and created a custom CSS reset layer. You can check [the commit](https://github.com/d-asensio/new-relic-apdex-board/commit/19d098cb2b2dc0871e5ab15021d549fee24b04a6).
 
@@ -58,7 +58,7 @@ I have followed TDD during the development process of this project, you can goss
 
 ## Commit guidelines
 
-I didn't use any strict commit guidelines to this project, I am aware of conventional commits, semantic release, and semantic versioning, but since I didn't have the need for generating a changelog based on functionalities, I avoided this practices.
+I didn't use any strict commit guidelines to this project, I am aware of conventional commits, semantic release, and semantic versioning, but since I didn't need generating a changelog based on functionalities, I avoided this practices.
 
 ## Commands
 
@@ -103,7 +103,7 @@ After this, the records are inserted into the hosts via `host.addApp(app)`:
 As you can see, it uses a binary search to perform the insertion:
 
 ```javascript
-  _binarySearch (app) {
+  _binarySearchIndex (app) {
     let startIndex = 0
     let endIndex = this._apps.length - 1
     let currentIndex
@@ -121,16 +121,16 @@ As you can see, it uses a binary search to perform the insertion:
       }
     }
 
-    return Math.abs(~endIndex)
+    return endIndex + 1
   }
 ```
 > Find this method at: `src/models/host.model.js`
 
-So it is discarding the half of the possibilities on each iteration of the `while` loop, so `O(log n)`.
+It is discarding half of the possibilities on each iteration of the `while` loop, so `O(log n)`.
 
 A nice optimization is that as an effect of sorting the app records right before inserting them to the host, it happens that the real cost is `O(1)` at this point (for the insertion operation of each new app I mean) since the binary search do not iterate through any record being the smallest app already at the end of the `host._apps` array.
 
-This way all the heavy work is handled by the performant [`std::sort` C++ 11 function](https://github.com/v8/v8/blob/4b9b23521e6fd42373ebbcb20ebe03bf445494f9/src/runtime/runtime-typedarray.cc#L135) I aforementioned which is unbeatable by any sorting algorithm that one could implement in javascript (I believe).
+This way all the heavy work is handled by the [`std::sort` C++ 11 function](https://github.com/v8/v8/blob/4b9b23521e6fd42373ebbcb20ebe03bf445494f9/src/runtime/runtime-typedarray.cc#L135) I aforementioned which is unbeatable by any sorting algorithm that one could implement in javascript (I believe).
 
 ### Deleting an app from the host
 
@@ -185,7 +185,7 @@ I will mention the used development tools in dependency order:
 
 - `autoprefixer`: Prefixes the CSS properties with the required vendor prefixes for the targets specified in the `.browserlistrc` file (used as a `postcss` plugin).
 
-- `babel-loader`: Allows Webpack to use babel.
+- `babel-loader`: Allows Webpack to use `babel`.
 
 - `copy-webpack-plugin`: Copies files to the Webpack build directory.
 
@@ -195,7 +195,7 @@ I will mention the used development tools in dependency order:
 
 - `HTML-webpack-plugin`: Allows `webpack` to load, parse and modify HTML files, used to set up the `index.html` file of the project.
 
-- `husky`: Used to run the tests and the linter before committing (it basically configures local git hooks).
+- `husky`: Used to run the tests and the linter before committing (it configures local git hooks).
 
 - `jest`: Test framework that runs the unit tests.
 
@@ -215,7 +215,7 @@ I will mention the used development tools in dependency order:
 
 - `sass-loader`: Allows `webpack` to use `node-sass`.
 
-- `standardx`: Used as a linter. I normally use `standardjs`, but this time I wanted to modify the ruleset (because it was warning me about react keys on the JSX, ad this was not relevant in this case).
+- `standardx`: Used as a linter. I normally use `standardjs`, but this time I wanted to modify the ruleset (because it was warning me about react keys on the JSX, and this was not relevant in this case).
 
 - `style-loader`: Used to insert the compiled CSS to the HTML.
 
