@@ -17,18 +17,18 @@ export class Host {
   }
 
   _insertAppInPosition (app) {
-    const appInsertionIndex = this._binarySearch(app)
+    const appInsertionIndex = this._binarySearchAppIndex(app)
     this._insertAppAtIndex(app, appInsertionIndex)
   }
 
   _removeAppFromPosition (app) {
-    const appIndex = this._binarySearch(app)
+    const appIndex = this._binarySearchAppIndex(app)
 
     this._indexExistOrThrow(appIndex)
     this._removeAppAtIndex(appIndex)
   }
 
-  _binarySearch (app) {
+  _binarySearchAppIndex (app) {
     let startIndex = 0
     let endIndex = this._apps.length - 1
     let currentIndex
@@ -46,7 +46,7 @@ export class Host {
       }
     }
 
-    return Math.abs(~endIndex)
+    return endIndex + 1
   }
 
   _insertAppAtIndex (app, insertionIndex) {
